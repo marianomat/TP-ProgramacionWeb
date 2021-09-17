@@ -1,0 +1,47 @@
+body {
+    background-image: url(imagen.jpg);
+
+     background-size: cover;
+      
+     background-repeat: no-repeat;
+     background-position: center center;
+     background-attachment: fixed;
+
+     margin:0px ;
+     font-family:fantasy;
+    }
+.custom-title { font-size: 60; }
+
+.center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 100px;
+    
+}
+
+
+.form-box{
+    display: flex;
+    justify-content: center;
+    height: 20px;
+    width: 200px;
+    text-align: center;
+
+}
+
+
+.navbar { background-color:lightsteelblue;
+height:  50px;
+display: flex;
+flex-direction: row;
+justify-content: flex-end;
+
+}
+.navbar-element {
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+
