@@ -1,0 +1,27 @@
+
+.custom_title {
+    color: blue;
+    font-size: 75px;
+}
+
+.main_div {
+    color: lightblue;
+    font-size: 40px;
+}
+
+.bloques {
+    height: 200px;
+    width: 200px;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.green {
+    background-color: green;
+}
+
+.red {
+    background-color: red;
+}
