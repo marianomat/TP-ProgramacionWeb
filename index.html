@@ -6,49 +6,40 @@
     <title>Programacion Web</title>
 </head>
 <body>
-<div class="main_div">
-    <h1 class="custom_title">
-        Bienvenidos a la materia Programacion Web
-    </h1>
-    <h2>
-        Ya me va a salir
-    </h2>
-    <p>
-        En esta materia vamos a aprender como hacer una pagina web desde 0, esto es lo primero que pude hacer jeje.
-    </p>
-    <div class="blue">
-        <button>A</button>
-    </div>
-    <div class="green">
-        <button>B</button>
-    </div>
-    <div class="red">
-        <button>C</button>
-    </div>
-</div>
-<div>
-    <h3>
-        Contenidos
-    </h3>
-    <ul>
-        <li> Introduccion </li>
-        <li> JavaScript </li>
-        <li> C++ </li>
-        <li> VSC </li>
-        <li> Conceptos avanzados</li>
-    </ul>
-</div>
-<div>
-    <div class="blue bloques">
-        <button>A</button>
-    </div>
-    <div class="green bloques">
-        <button>B</button>
-    </div>
-    <div class="red bloques">
-        <button>C</button>
-    </div>
+<div class="navbar">
+    <h4 class="navbar-element"> Inicio </h4>
+    <h4 class="navbar-element" > Mi perfil</h4>
+    <h4 class="navbar-element"> Mis turnos</h4>
 </div>
 
+<div class="main_div">
+    <h1 class="custom_title center">
+        REGISTRO DE TURNOS
+    </h1>
+</div>
+<div class="center tit">
+   <form class="center">
+        <h2>
+            Complete el siguiente formulario
+        </h2>
+        <div class="input-grupo">
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" name="user_name">
+        </div>
+        <div class="input-grupo">   
+                <label for="lastname">Apellido:</label>
+                <input type="text" id="lastname" lastname="user_lastname">
+        </div>
+        <div class="input-grupo">  
+                <label for="number">Número celular:</label>
+                <input type="text" id="number" number="user_number">
+        </div>
+        <div class="input-grupo">  
+                <label for="mail">Correo electrónico:</label>
+                <input type="email" id="mail" name="user_mail">
+        </div>
+        <button type="submit"> Enviar formulario </button>
+    </form>
+</div>
 </body>
 </html>
