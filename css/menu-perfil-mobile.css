@@ -1,0 +1,23 @@
+@media (max-width: 1200px) {
+    .menu {
+        position: fixed;
+        top: 75px;
+        left: 0;
+        min-width: 100vw;
+        min-height: 100vh;
+        background-color: white;
+        z-index: 1000;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-direction: column;
+    }
+    #menu-icono {
+        display: inline;
+    }
+    #nav-usuario {
+        display: none;
+    }
+}
+
+

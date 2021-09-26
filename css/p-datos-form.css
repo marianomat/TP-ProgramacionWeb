@@ -8,6 +8,8 @@ a {
     text-decoration: none;
 }
 .perfil-navbar {
+    position: sticky;
+    top: 0px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -16,7 +18,7 @@ a {
     background-color: #194D86;
     margin: 0;
 }
-.perfil-navbar a {
+.perfil-navbar a, .perfil-navbar div {
     font-style: normal;
     font-weight: normal;
     font-size: 24px;
@@ -24,25 +26,38 @@ a {
     color: white;
 }
 
+.perfil-navbar div:hover {
+    cursor: pointer;
+}
 .main {
     margin: 0px 10%;
     margin-top: 50px;
     display: flex;
     justify-content: space-between;
 }
+.menu-container {
+    width: 200px;
+    padding: 12px;
+    background: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    height: fit-content;
 
+
+}
 .menu {
     display: flex;
     flex-shrink: 0;
     flex-direction: column;
     justify-content: start;
     align-items: start;
-    padding: 1%;
-    background: white;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 5px;
     width: 200px;
     height: fit-content;
+
+}
+
+#menu-icono {
+    display: none;
 }
 
 .menu-titulo {
@@ -50,7 +65,7 @@ a {
     font-weight: lighter;
     font-size: 24px;
     margin: 0 auto;
-    color: #03045E;
+    color: #194D86;
     text-decoration: underline;
 }
 .menu-button {
