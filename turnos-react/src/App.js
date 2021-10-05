@@ -7,7 +7,11 @@ import {
   Link
 } from "react-router-dom";
 import Perfil from "./perfil/Perfil";
-import Home from "./Home";
+import Home from './Home/Home';
+import Inicio from './P-inicio/Login';
+import Login from './P-inicio/Login';
+import Singin from './sing-in/Sing-in';
+
 
 function App() {
   return (
@@ -15,10 +19,17 @@ function App() {
           <Switch>
             <Route path="/perfil">
               <Perfil />
+              </Route>
+            <Route path="/Singin">
+              <Singin/>
+            </Route>
+            <Route path="/login">
+              <Login/>
             </Route>
             <Route path="/">
               <Home />
             </Route>
+            
           </Switch>
       </Router>
   );

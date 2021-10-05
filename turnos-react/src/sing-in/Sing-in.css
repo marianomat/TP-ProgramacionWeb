@@ -1,0 +1,46 @@
+.general {
+    background-image: url(./registroimagen.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    margin:0px ;
+    font-family:"Roboto", sans-serif;
+    min-height: 100vh;
+}
+
+.custom-title { font-size: 60px; }
+
+.center {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   margin: 100px;
+}
+.input-grupo {
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+   margin: 0 0 5px 0;
+}
+
+.input-grupo label {
+   margin-right: 30px;
+}
+
+.form-box{
+   display: flex;
+   justify-content: center;
+   height: 20px;
+   width: 200px;
+   text-align: center;
+   
+}
+.register{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+}
+
