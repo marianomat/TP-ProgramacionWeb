@@ -1,0 +1,6 @@
+.main {
+    margin: 0px 10%;
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+}
