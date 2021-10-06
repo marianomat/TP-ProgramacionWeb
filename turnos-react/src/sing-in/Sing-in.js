@@ -2,9 +2,9 @@ import "./Sing-in.css"
 function Singin () {
     return ( 
     <div className = "general">
-        -
-    <div class="center">
-    <form class="center">
+        
+    <div class="center-singin">
+    <form class="center-singin">
         <h1>Ingrese sus datos</h1>
         <div class="input-grupo">
             <label for="nombre">Nombre</label>

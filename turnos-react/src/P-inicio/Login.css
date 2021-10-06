@@ -12,12 +12,13 @@
 
 .custom-title { font-size: 60px; }
 
-.center {
+.center-login {
    display: flex;
    flex-direction: column;
    align-items: center;
    justify-content: center;
-   margin: 100px;
+   margin: 0px;
+   padding: 20vh;
 }
 .input-grupo {
    width: 100%;

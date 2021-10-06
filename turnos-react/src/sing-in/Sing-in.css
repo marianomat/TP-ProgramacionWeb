@@ -11,12 +11,13 @@
 
 .custom-title { font-size: 60px; }
 
-.center {
+.center-singin {
    display: flex;
    flex-direction: column;
    align-items: center;
    justify-content: center;
-   margin: 100px;
+   margin: 0px;
+   padding: 15vh;
 }
 .input-grupo {
    width: 100%;
