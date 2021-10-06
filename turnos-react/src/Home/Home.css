@@ -4,10 +4,10 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
-
     font-family:"Roboto", sans-serif;
     min-height: 100vh;
 }
+
 .home-center { /* CAMBIE EL NOMBRE Y LOS NOMBRES EN HOME.JS */
     display: flex;
     flex-direction: column;

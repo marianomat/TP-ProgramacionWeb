@@ -3,10 +3,10 @@ import "./Turnos.css";
 function Turnos() {
 
     return (
-        <div className="contenido">
-            <div className="contenido-tabla">
+        <div className="turnos-contenido">
+            <div className="turnos-contenido-tabla">
                 <h2>Turnos</h2>
-                <div className="form-grupo">
+                <div className="turnos-form-grupo">
                     <label htmlFor="fechas-turnos">Seleccionar Fecha</label>
                     <input id="fechas-turnos" type="date"/>
                 </div>
@@ -24,36 +24,36 @@ function Turnos() {
                     </thead>
                     <tbody>
                     <tr>
-                        <td className="td-horario">15:15</td>
+                        <td className="turnos-td-horario">15:15</td>
                         <td>Carlos</td>
                         <td>Consulta</td>
                         <td>NO</td>
-                        <td className="td-edit"><i className="fas fa-edit"></i></td>
-                        <td className="td-delete"><i className="fas fa-trash-alt"></i></td>
+                        <td className="turnos-td-edit"><i className="fas fa-edit"></i></td>
+                        <td className="turnos-td-delete"><i className="fas fa-trash-alt"></i></td>
                     </tr>
                     <tr>
-                        <td className="td-horario">15:15</td>
+                        <td className="turnos-td-horario">15:15</td>
                         <td>Carlos</td>
                         <td>Consulta</td>
                         <td>NO</td>
-                        <td className="td-edit"><i className="fas fa-edit"></i></td>
-                        <td className="td-delete"><i className="fas fa-trash-alt"></i></td>
+                        <td className="turnos-td-edit"><i className="fas fa-edit"></i></td>
+                        <td className="turnos-td-delete"><i className="fas fa-trash-alt"></i></td>
                     </tr>
                     <tr>
-                        <td className="td-horario">15:15</td>
+                        <td className="turnos-td-horario">15:15</td>
                         <td>Carlos</td>
                         <td>Consulta</td>
                         <td>NO</td>
-                        <td className="td-edit"><i className="fas fa-edit"></i></td>
-                        <td className="td-delete"><i className="fas fa-trash-alt"></i></td>
+                        <td className="turnos-td-edit"><i className="fas fa-edit"></i></td>
+                        <td className="turnos-td-delete"><i className="fas fa-trash-alt"></i></td>
                     </tr>
                     <tr>
-                        <td className="td-horario">15:15</td>
+                        <td className="turnos-td-horario">15:15</td>
                         <td>Carlos</td>
                         <td>Consulta</td>
                         <td>NO</td>
-                        <td className="td-edit"><i className="fas fa-edit"></i></td>
-                        <td className="td-delete"><i className="fas fa-trash-alt"></i></td>
+                        <td className="turnos-td-edit"><i className="fas fa-edit"></i></td>
+                        <td className="turnos-td-delete"><i className="fas fa-trash-alt"></i></td>
                     </tr>
                     </tbody>
                 </table>
