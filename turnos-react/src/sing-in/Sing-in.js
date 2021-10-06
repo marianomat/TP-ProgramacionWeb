@@ -1,3 +1,4 @@
+
 import "./Sing-in.css"
 function Singin () {
     return ( 
@@ -38,7 +39,7 @@ function Singin () {
             <label for="imagen">Imagen </label>
             <input type="file" id="imagen" />
         </div>
-        <a href="r-exitoso.html" class="botons">Registrarme</a>
+        <a href="Ssignin" class="botons">Registrarme</a>
     </form>
  </div>
  </div>
