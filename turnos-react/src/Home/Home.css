@@ -4,16 +4,18 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
-    
+
     font-family:"Roboto", sans-serif;
     min-height: 100vh;
 }
-.center {
+.home-center { /* CAMBIE EL NOMBRE Y LOS NOMBRES EN HOME.JS */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 100px;}
+    margin: 0; /* CAMBIE ESTO */
+    padding: 50px; /* CAMBIE ESTO */
+}
 
 .botons {
         

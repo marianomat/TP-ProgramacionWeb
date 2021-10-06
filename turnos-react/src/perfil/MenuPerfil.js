@@ -34,7 +34,7 @@ function MenuPerfil(){
         botonMenu.addEventListener("click", (e) => {
             menuPerfil.toggleAttribute("hidden");
         })
-    });
+    }, []);
 
     return(
         <div id="menu-perfil" className="menu-container">
