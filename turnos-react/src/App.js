@@ -11,6 +11,7 @@ import Home from './Home/Home';
 import Inicio from './P-inicio/Login';
 import Login from './P-inicio/Login';
 import Singin from './sing-in/Sing-in';
+import Ssignin from './S-signin/S-signin';
 
 
 function App() {
@@ -23,8 +24,12 @@ function App() {
             <Route path="/Singin">
               <Singin/>
             </Route>
+            
             <Route path="/login">
               <Login/>
+            </Route>
+            <Route path="/Ssignin">
+              <Ssignin/>
             </Route>
             <Route path="/">
               <Home />
