@@ -13,13 +13,25 @@ import Horarios from "./componentes-perfil/Horarios/Horarios";
 import Pagos from "./componentes-perfil/Pagos/Pagos";
 import Datos from "./componentes-perfil/Datos/Datos";
 import DatosForm from "./componentes-perfil/DatosForm/DatosForm";
+import {useState} from "react";
 
 function Perfil() {
+    //Usamos el state para ir cambiando la visiblidad del menu en version mobile
+    //Cuando se invoca esta funcion handleCallback cambia el estado de visible a hidden y viceversa
+    //El state es usado por el elemento hijo MenuPerfil para determinar si tiene o no que ser visible
+    const [menuVisible, setMenuVisible] = useState("hidden");
+    function handleCallback() {
+        menuVisible === "hidden" ? setMenuVisible("visible") : setMenuVisible("hidden");
+    }
+    //Esta funcion permite que cuando se invoque en el elemento hijo menu, al seleccionar una opcion se cierre.
+    function handleCerrarMenu() {
+        setMenuVisible("hidden");
+    }
     return (
         <div>
-            <NavPerfil/>
+            <NavPerfil handleClick={handleCallback}/>
             <section className="main">
-                <MenuPerfil/>
+                <MenuPerfil visibilidadMenu={menuVisible} handleCerrarMenu={handleCerrarMenu}/>
                 <Switch>
                     <Route path="/perfil/turnos">
                         <Turnos />
