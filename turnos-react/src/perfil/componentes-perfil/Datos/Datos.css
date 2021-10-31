@@ -44,3 +44,26 @@
 #boton-modificar-datos {
     background-color: forestgreen;
 }
+
+@media (max-width: 1200px) {
+    .datos-contenido {
+        margin: 0;
+        min-height: 90vh;
+    }
+    .datos-contenido h2 {
+        margin: 0;
+        padding: 26px;
+    }
+    .datos-contenido ul {
+        margin: 10px
+    }
+    .datos-contenido li {
+        padding: 10px 0;
+    }
+    .botones-datos a {
+        padding: 10px;
+        border-radius: 2px;
+        color: white;
+        font-size: 1.5rem;
+    }
+}

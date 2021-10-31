@@ -1,5 +1,8 @@
 import "./Horarios.css";
 
+
+
+// AGREGAR https://react-day-picker.js.org/examples/selected-multiple/
 function Horarios() {
     return (
         <div className="horarios-contenido">
@@ -31,51 +34,21 @@ function Horarios() {
                     <h5>Seleccione la franja horaria</h5>
                     <form action="">
                         <div className="horarios-contenedor-desde">
-                            <label htmlFor="horarios-desde">Desde</label>
-                            <div
-                                className='input-group'
-                                id='horarios-desde'
-                                data-td-target-input='nearest'
-                                data-td-target-toggle='nearest'
-                            >
-                                <input
-                                    id='horarios-desde-input'
-                                    type='text'
-                                    className='form-control'
-                                    data-td-target='#horarios-desde'
-                                />
-                                <span
-                                    className='input-group-text'
-                                    data-td-target='#horarios-desde'
-                                    data-td-toggle='datetimepicker'
-                                >
-                                 <span className='fas fa-clock'></span>
-                                 </span>
-                            </div>
+                            <label htmlFor="horarios-desde-input">Desde</label>
+                            <input
+                                id='horarios-desde-input'
+                                type='time'
+                                className='form-control'
+                                step="900"
+                            />
                         </div>
                         <div className="contenedor-hasta">
                             <label htmlFor="horarios-hasta">Hasta</label>
-                            <div
-                                className='input-group'
-                                id='horarios-hasta'
-                                data-td-target-input='nearest'
-                                data-td-target-toggle='nearest'
-                            >
-                                <input
-                                    id='horarios-hasta-input'
-                                    type='text'
-                                    className='form-control'
-                                    data-td-target='#horarios-hasta'
-                                />
-                                <span
-                                    className='input-group-text'
-                                    data-td-target='#horarios-hasta'
-                                    data-td-toggle='datetimepicker'
-                                >
-                                 <span className='fas fa-clock'></span>
-                                 </span>
-                            </div>
-
+                            <input
+                                id='horarios-hasta-input'
+                                type='time'
+                                className='form-control'
+                            />
                         </div>
                         <button>Habilitar</button>
                     </form>

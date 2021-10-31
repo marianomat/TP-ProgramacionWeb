@@ -69,6 +69,7 @@
     display: flex;
     flex-shrink: inherit;
     flex-direction: column;
+    flex-grow: 2;
     align-items: flex-start;
     justify-content: start;
     background: #FFFFFF;
@@ -117,7 +118,7 @@
 
 @media (max-width: 1200px) {
     .dashboard-contenido {
-        margin: 3px;
+        margin: 0;
     }
     .dashboard-contenido-header {
         flex-wrap: wrap;
@@ -125,6 +126,7 @@
         justify-content: space-evenly;
     }
     .dashboard-contenido-titulo {
+        margin-top: 10px;
         margin-bottom: 30px;
     }
     .dashboard-contenido-info {
@@ -146,3 +148,4 @@
         margin: auto;
     }
 }
+

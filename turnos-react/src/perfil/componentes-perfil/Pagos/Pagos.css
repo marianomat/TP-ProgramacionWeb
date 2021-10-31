@@ -48,3 +48,32 @@
     color: red;
     font-size: 24px;
 }
+
+
+@media (max-width: 1200px) {
+    .pagos-contenido {
+        margin: 0;
+        min-height: 90vh;
+        background-color: white;
+    }
+    .pagos-contenido-tabla {
+        padding: 0;
+        width: 100vw;
+        box-shadow: none;
+    }
+    .pagos-contenido-tabla h2 {
+        margin: 0;
+        padding: 30px;
+    }
+    .pagos-contenido-tabla th {
+        padding: 15px;
+        font-size: 20px;
+    }
+    .pagos-contenido-tabla td {
+        font-size: 16px;
+        padding: 20px 10px;
+    }
+
+
+}
+

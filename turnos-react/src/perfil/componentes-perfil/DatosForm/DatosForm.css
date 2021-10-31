@@ -42,3 +42,21 @@ button {
     width: 130px;
     border-radius: 5px;
 }
+
+@media (max-width: 1200px) {
+    .datosform-contenido {
+        margin: 0;
+        padding: 0;
+    }
+    .datosform-contenido h1 {
+        margin: 0;
+        padding: 24px 0 0 0;
+    }
+    .datosform-contenido form {
+        font-size: 20px;
+    }
+    .datosform-contenido form button{
+        margin-bottom: 34px;
+        font-size: 20px;
+    }
+}
