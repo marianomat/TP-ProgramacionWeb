@@ -28,3 +28,9 @@ class RegisterSerializer(serializers.ModelSerializer):
             # Validated_date diccionario con los fields de la request
         )
         return user
+
+
+class MeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = "__all__"
