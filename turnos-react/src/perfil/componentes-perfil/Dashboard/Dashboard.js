@@ -1,6 +1,7 @@
 import "./Dashboard.css"
 
 function Dashboard() {
+
     return (
         <div className="dashboard-contenido">
             <div className="dashboard-contenido-header">

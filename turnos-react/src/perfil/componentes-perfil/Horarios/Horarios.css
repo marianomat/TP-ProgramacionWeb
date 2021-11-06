@@ -86,7 +86,7 @@
         font-weight: lighter;
         margin: 10px 0;
     }
-    .horarios-contenedor-desde, .contenedor-hasta, .contenedor-duracion {
+    .horarios-contenedor-desde, .contenedor-cant-turnos, .contenedor-duracion {
         display: flex;
         flex-direction: column;
         justify-content: center;

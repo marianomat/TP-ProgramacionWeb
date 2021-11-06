@@ -2,6 +2,8 @@ import "./Horarios.css";
 import DayPicker, {DateUtils} from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import {useState} from "react";
+import {httpPost} from "../../../utils/httpFunctions";
+import {makeDateTime} from "../../../utils/helpers";
 
 // Utilizamos la libreria react-day-picker para facilitar la seleccion de dias en qeu se habilitan turnos.
 // Utiliza el State para determinar que dias son seleccionados.
@@ -10,14 +12,16 @@ import {useState} from "react";
 function Horarios() {
     const [selectedDays, setDay ] = useState({selectedDays: []}); // Generamos el estado para los dias seleccionados
 
+    const [turnosDayCount, setTurnosDayCount] = useState(1)
+    const [turnosStartHour, setTurnosStartHour] = useState("08:30")
+    const [turnosDuration, setTurnosDuration] = useState(30)
     // Funcion que maneja los dias seleccionados en el estado
     // El primer parametro recibe un dia seleccionado, el segundo parametro es para eliminar la seleccion si se vuelve a presionar sobre el mismo dia
-    function handleDayClick(day, { selected, disabled }) {
+    const handleDayClick = (day, { selected, disabled }) => {
         if (disabled) {
             // Day is disabled, do nothing
             return;
         }
-        console.log(selectedDays)
         const selectedDays2 = selectedDays.selectedDays;
 
         if (selected) {
@@ -31,6 +35,20 @@ function Horarios() {
         setDay({ selectedDays: selectedDays2 })
     }
 
+    const createTurnos = async (e) => {
+        e.preventDefault()
+        for (const day of selectedDays.selectedDays) {
+            let startHourISO = makeDateTime(day,turnosStartHour);
+            for(let i = 0; i < turnosDayCount; i++ ) {
+                await httpPost("api/turnos/", {
+                    doctor: "mariano",
+                    hour: new Date(startHourISO).toISOString()
+                })
+                startHourISO = startHourISO + (60000 * turnosDuration)
+            }
+        }
+    }
+
     return (
         <div className="horarios-contenido">
             <h2>Habilitar turnos</h2>
@@ -40,33 +58,43 @@ function Horarios() {
                 </div>
                 <div className="horarios-contenedor">
                     <h5>Seleccione la franja horaria</h5>
-                    <form action="">
+                    <form onSubmit={(e) => createTurnos(e)}>
                         <div className="horarios-contenedor-desde">
                             <label htmlFor="horarios-desde-input">Desde</label>
                             <input
                                 id='horarios-desde-input'
                                 type='time'
                                 className='form-control'
-                                step="900"
+                                value={turnosStartHour} step="600"
+                                onChange={(e) => setTurnosStartHour(e.target.value)}
                             />
                         </div>
-                        <div className="contenedor-hasta">
-                            <label htmlFor="horarios-hasta">Hasta</label>
-                            <input
-                                id='horarios-hasta-input'
-                                type='time'
-                                className='form-control'
-                            />
+                        <div className="contenedor-cant-turnos">
+                            <label htmlFor="horarios-cant-input">Cantidad de turnos en el dia</label>
+                            <select name=""  id="horarios-cant-input" className='form-control' value={turnosDayCount}
+                            onChange={(e) => setTurnosDayCount(e.target.value)}>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                            </select>
+
                         </div>
                         <div className="contenedor-duracion">
                             <label htmlFor="horarios-duracion">Duracion turnos (en min)</label>
-                            <input
-                                id='horarios-duracion-input'
-                                type='number'
-                                className='form-control'
-                            />
+                            <select name=""   id='horarios-duracion-input' className='form-control' value={turnosDuration}
+                                    onChange={(e) => setTurnosDuration(e.target.value)}>
+                                <option value="15">15</option>
+                                <option value="30">30</option>
+                                <option value="60">60</option>
+                            </select>
                         </div>
-                        <button>Habilitar</button>
+                        <button type="submit">Habilitar</button>
                     </form>
 
                 </div>
