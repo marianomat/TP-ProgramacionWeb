@@ -21,7 +21,7 @@ function TurnosForm(props) {
 
     }
 
-    useEffect(() => getTurno(id), [])
+    useEffect((ID) => getTurno(id), [])
 
     return (
         <div className="datosform-contenido">
