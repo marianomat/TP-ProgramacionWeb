@@ -14,6 +14,7 @@ import Pagos from "./componentes-perfil/Pagos/Pagos";
 import Datos from "./componentes-perfil/Datos/Datos";
 import DatosForm from "./componentes-perfil/DatosForm/DatosForm";
 import {useState} from "react";
+import TurnosForm from "./componentes-perfil/TurnosForm/TurnosForm";
 
 function Perfil() {
     //Usamos el state para ir cambiando la visiblidad del menu en version mobile
@@ -33,6 +34,9 @@ function Perfil() {
             <section className="main">
                 <MenuPerfil visibilidadMenu={menuVisible} handleCerrarMenu={handleCerrarMenu}/>
                 <Switch>
+                    <Route path="/perfil/turnos/:id">
+                        <TurnosForm />
+                    </Route>
                     <Route path="/perfil/turnos">
                         <Turnos />
                     </Route>
