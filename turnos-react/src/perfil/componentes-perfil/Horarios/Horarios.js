@@ -1,8 +1,8 @@
 import "./Horarios.css";
 import DayPicker, {DateUtils} from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
-import {useState} from "react";
-import {httpPost} from "../../../utils/httpFunctions";
+import {useEffect, useState} from "react";
+import {httpGet, httpPost} from "../../../utils/httpFunctions";
 import {makeDateTime} from "../../../utils/helpers";
 
 // Utilizamos la libreria react-day-picker para facilitar la seleccion de dias en qeu se habilitan turnos.
@@ -11,7 +11,7 @@ import {makeDateTime} from "../../../utils/helpers";
 // AGREGAR https://react-day-picker.js.org/examples/selected-multiple/
 function Horarios() {
     const [selectedDays, setDay ] = useState({selectedDays: []}); // Generamos el estado para los dias seleccionados
-
+    const [disabledDays, setDisabledDays] = useState("")
     const [turnosDayCount, setTurnosDayCount] = useState(1)
     const [turnosStartHour, setTurnosStartHour] = useState("08:30")
     const [turnosDuration, setTurnosDuration] = useState(30)
@@ -19,7 +19,7 @@ function Horarios() {
     // El primer parametro recibe un dia seleccionado, el segundo parametro es para eliminar la seleccion si se vuelve a presionar sobre el mismo dia
     const handleDayClick = (day, { selected, disabled }) => {
         if (disabled) {
-            // Day is disabled, do nothing
+            window.alert('Ya existen turnos en ese día');
             return;
         }
         const selectedDays2 = selectedDays.selectedDays;
@@ -36,25 +36,47 @@ function Horarios() {
     }
 
     const createTurnos = async (e) => {
-        e.preventDefault()
-        for (const day of selectedDays.selectedDays) {
-            let startHourISO = makeDateTime(day,turnosStartHour);
-            for(let i = 0; i < turnosDayCount; i++ ) {
-                await httpPost("api/turnos/", {
-                    doctor: "mariano",
-                    hour: new Date(startHourISO).toISOString()
-                })
-                startHourISO = startHourISO + (60000 * turnosDuration)
+        try {
+            e.preventDefault()
+            for (const day of selectedDays.selectedDays) {
+                let startHourISO = makeDateTime(day,turnosStartHour);
+                for(let i = 0; i < turnosDayCount; i++ ) {
+                    await httpPost("api/turnos/", {
+                        doctor: "mariano",
+                        hour: new Date(startHourISO).toISOString()
+                    })
+                    startHourISO = startHourISO + (60000 * turnosDuration)
+                }
             }
+            window.alert("Turnos creados correctamente!");
+        } catch (error) {
+            window.alert("Error creando los turnos :(");
+        }
+
+    }
+
+
+    const fetchTurnos = async () => {
+        //No olvidar la barra al final de turnos
+        try {
+            let turnos = await httpGet("api/turnos/")
+            let disabled = turnos.map(day => {
+                return new Date(day.hour)
+            })
+            setDisabledDays(disabled)
+        } catch (error) {
+            window.alert("Error obteniendo los turnos");
         }
     }
+
+    useEffect(fetchTurnos, [disabledDays] )
 
     return (
         <div className="horarios-contenido">
             <h2>Habilitar turnos</h2>
             <div className="horarios-contenido-items">
                 <div className="contenido-calendario">
-                    <DayPicker onDayClick={handleDayClick} selectedDays={selectedDays.selectedDays}  disabledDays={{ daysOfWeek: [0] }}/>
+                    <DayPicker onDayClick={handleDayClick} selectedDays={selectedDays.selectedDays}  disabledDays={disabledDays} />
                 </div>
                 <div className="horarios-contenedor">
                     <h5>Seleccione la franja horaria</h5>

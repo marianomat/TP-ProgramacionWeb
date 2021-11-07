@@ -61,9 +61,9 @@
     font-size: 20px;
 }
 
-.turnos-td-edit {
+.turnos-td-edit i{
     color: green;
-    font-size: 24px;
+    font-size: 16px;
 }
 
 .turnos-td-delete {

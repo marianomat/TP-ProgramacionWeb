@@ -1,8 +1,9 @@
 import "./Turnos.css";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {httpGet} from "../../../utils/httpFunctions";
+import {httpDelete, httpGet} from "../../../utils/httpFunctions";
 import {getToday} from "../../../utils/helpers";
+import {Link} from "react-router-dom";
 
 function Turnos() {
 
@@ -12,17 +13,23 @@ function Turnos() {
         //No olvidar la barra al final de turnos
         httpGet("api/turnos/")
             .then((data) => {
-                data[0].horario = new Date(data[0].hour).toLocaleDateString() + " "
-                data[0].horario += new Date(data[0].hour).toLocaleTimeString() + " hs"
+                for(let day of data) {
+                    day.horario = new Date(day.hour).toLocaleDateString() + " "
+                    day.horario += new Date(day.hour).toLocaleTimeString() + " hs"
+                }
                 setTurnos(data)
             });
+    }
+
+    const handleDelete = (id) => {
+        httpDelete("api/turnos/" + id).then((res) => window.alert("Eliminado correctamente")).catch(err => window.alert(err))
     }
     //UseEffect tiene dos argumentos, el primero una funcion (referencia, no el valro de retorno) que se ejecuta
     //El segundo es un array de dependencais, que son variables que React observa y cuando cambie alguna de ellas
     //va a ejecutarse la primer funcion.
     //Si pasamos un array vacio para que solamente se corra al principio
     // Si no ponemos nada , cada cambio que se produzca en el componente se corre la funcion (costoso)
-    useEffect(fetchTurnos, []);
+    useEffect(fetchTurnos, [turnos]);
     return (
         <div className="turnos-contenido">
             <div className="turnos-contenido-tabla">
@@ -47,13 +54,15 @@ function Turnos() {
                     <tbody>
                     {turnos.map(turno => {
                         return (
-                            <tr>
+                            <tr key={turno.id}>
                                 <td className="turnos-td-horario">{turno.horario}</td>
                                 <td>{turno.patient_name + " " + turno.patient_lastName}</td>
                                 <td>{turno.description}</td>
                                 <td>{turno.is_payed ? "SI" : "NO"}</td>
-                                <td className="turnos-td-edit"><i className="fas fa-edit"></i></td>
-                                <td className="turnos-td-delete"><i className="fas fa-trash-alt"></i></td>
+                                <td className="turnos-td-edit">
+                                    <Link to={"/perfil/turnos/" + turno.id} test={"asd"}><i className="fas fa-edit"></i> </Link>
+                                </td>
+                                <td onClick={() => {handleDelete(turno.id)}} className="turnos-td-delete"><i className="fas fa-trash-alt"></i></td>
                             </tr>
                         )
                     })}
