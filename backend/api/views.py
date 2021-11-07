@@ -1,7 +1,8 @@
 from django.http import HttpResponse
-from rest_framework import viewsets, generics
+from rest_framework import generics, viewsets
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 from api.models import Turno
 from api.serializers import TurnoSerializer, MeSerializer
@@ -21,7 +22,11 @@ class TurnoViewSet(viewsets.ModelViewSet):
 class RegisterView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
 
+
+# Otra manera de crear rutas.heredar de clases creadas por Django, sino con funciones
+# Recibe como parametro request
+
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def me(request):
-    return HttpResponse(MeSerializer(request.user).data, 200)
+    return Response(MeSerializer(request.user).data, 202)
