@@ -17,7 +17,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = ["username", "password"]
+        fields = ["username", "password" , "last_name","email", "first_name"]
 
     # Hay que overridear el metodo del create para que guarde la password encriptada
     def create(self, validated_data):
