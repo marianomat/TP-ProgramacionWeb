@@ -1,8 +1,8 @@
 import axios from "axios";
 
 // DESCOMENTAR SEGUN LA URL DEL BACK
-//const baseURL = "http://localhost:8000/";
-const baseURL = "http://127.0.0.1:8000/";
+const baseURL = "http://localhost:8000/";
+//const baseURL = "http://127.0.0.1:8000/";
 
 export const httpGet = async (endpoint) => {
     return axios.get(baseURL + endpoint).then((res) => {

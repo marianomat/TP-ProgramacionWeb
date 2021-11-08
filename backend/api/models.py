@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 
 
@@ -19,6 +20,13 @@ class Turno(models.Model):
     patient_name = models.TextField(blank=True, null=True, default="TURNO")
     patient_lastName = models.TextField(blank=True, null=True, default="DISPONIBLE")
     patient_phone = models.TextField(blank=True, default="--")
+    # HAY QUE PONER ESTA FOREIGN
+    # doctor = models.ForeignKey(
+    #     get_user_model(),
+    #     on_delete=models.CASCADE,
+    # )
+
+
 
 
 
