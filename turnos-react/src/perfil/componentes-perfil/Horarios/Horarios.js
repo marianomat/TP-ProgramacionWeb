@@ -4,12 +4,14 @@ import 'react-day-picker/lib/style.css';
 import {useEffect, useState} from "react";
 import {httpGet, httpPost} from "../../../utils/httpFunctions";
 import {makeDateTime} from "../../../utils/helpers";
+import {useAlert} from "react-alert";
 
 // Utilizamos la libreria react-day-picker para facilitar la seleccion de dias en qeu se habilitan turnos.
 // Utiliza el State para determinar que dias son seleccionados.
 
 // AGREGAR https://react-day-picker.js.org/examples/selected-multiple/
 function Horarios() {
+    const alert = useAlert()
     const [selectedDays, setDay ] = useState({selectedDays: []}); // Generamos el estado para los dias seleccionados
     const [disabledDays, setDisabledDays] = useState("")
     const [turnosDayCount, setTurnosDayCount] = useState(1)
@@ -19,7 +21,9 @@ function Horarios() {
     // El primer parametro recibe un dia seleccionado, el segundo parametro es para eliminar la seleccion si se vuelve a presionar sobre el mismo dia
     const handleDayClick = (day, { selected, disabled }) => {
         if (disabled) {
-            window.alert('Ya existen turnos en ese día');
+            alert.show('Ya existen turnos en el día seleccionado',{
+                type: "error"
+            })
             return;
         }
         const selectedDays2 = selectedDays.selectedDays;
@@ -48,9 +52,13 @@ function Horarios() {
                     startHourISO = startHourISO + (60000 * turnosDuration)
                 }
             }
-            window.alert("Turnos creados correctamente!");
+            alert.show('Turno/s creado correctamente',{
+                type: "success"
+            })
         } catch (error) {
-            window.alert("Error creando los turnos :(");
+            alert.show('Error en la creación, intente mas tarde!',{
+                type: "error"
+            })
         }
 
     }
@@ -65,7 +73,9 @@ function Horarios() {
             })
             setDisabledDays(disabled)
         } catch (error) {
-            window.alert("Error obteniendo los turnos");
+            alert.show('Error obteniendo los turnos',{
+                type: "error"
+            })
         }
     }
 

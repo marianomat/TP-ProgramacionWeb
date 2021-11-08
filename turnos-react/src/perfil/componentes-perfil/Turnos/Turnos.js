@@ -4,9 +4,10 @@ import axios from "axios";
 import {httpDelete, httpGet} from "../../../utils/httpFunctions";
 import {getToday} from "../../../utils/helpers";
 import {Link} from "react-router-dom";
+import {useAlert} from "react-alert";
 
 function Turnos() {
-
+    const alert = useAlert()
     const [turnos, setTurnos] = useState([]);
     const [diaSeleccionado, setDiaSeleccionado] = useState(getToday())
     const fetchTurnos = () => {
@@ -18,11 +19,22 @@ function Turnos() {
                     day.horario += new Date(day.hour).toLocaleTimeString() + " hs"
                 }
                 setTurnos(data)
-            });
+            }).catch((err) => {
+                alert.show('Error obtenido los turnos, intente mas tarde!',{
+                    type: "error"
+                })
+            }
+        )
     }
 
     const handleDelete = (id) => {
-        httpDelete("api/turnos/" + id).then((res) => window.alert("Eliminado correctamente")).catch(err => window.alert(err))
+        httpDelete("api/turnos/" + id)
+            .then((res) => alert.show('Eliminado correctamente!',{
+                type: "success"
+            }))
+            .catch(err => alert.show('No se pudo eliminar, intente mas tarde!',{
+                type: "error"
+            }))
     }
     //UseEffect tiene dos argumentos, el primero una funcion (referencia, no el valro de retorno) que se ejecuta
     //El segundo es un array de dependencais, que son variables que React observa y cuando cambie alguna de ellas

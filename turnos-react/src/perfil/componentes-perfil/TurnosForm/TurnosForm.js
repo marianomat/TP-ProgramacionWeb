@@ -2,8 +2,10 @@ import "./TurnosForm.css"
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {httpGet, httpPut} from "../../../utils/httpFunctions";
+import {useAlert} from "react-alert";
 
 function TurnosForm(props) {
+    const alert = useAlert()
     const {id} = useParams()
     const [turno, setTurno] = useState({})
 
@@ -16,8 +18,12 @@ function TurnosForm(props) {
     const editTurno = (e) => {
         e.preventDefault()
         httpPut("api/turnos/" + id + "/", turno).then((res) => {
-            window.alert("UPDATED")
-        }).catch((err) => window.alert(err))
+            alert.show('Turno modificado correctamente',{
+                type: "success"
+            })
+        }).catch((err) => alert.show('No se pudo modificar, intente mas tarde!',{
+            type: "error"
+        }))
 
     }
 

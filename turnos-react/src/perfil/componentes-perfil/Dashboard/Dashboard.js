@@ -1,9 +1,10 @@
 import "./Dashboard.css"
 import {useEffect, useState} from "react";
 import {httpGet} from "../../../utils/httpFunctions";
+import {useAlert} from "react-alert";
 
 function Dashboard() {
-
+    const alert = useAlert()
     const [proximoTurno, setProximoTurno] = useState(null)
     const [turnos, setTurnos] = useState([])
 
@@ -11,6 +12,10 @@ function Dashboard() {
         httpGet("api/turnos/").then((res) => {
             setProximoTurno(res[0])
             setTurnos(res)
+        }).catch(err => {
+            alert.show('No se puede obtener información de los turnos',{
+                type: "error"
+            })
         })
     }
 
