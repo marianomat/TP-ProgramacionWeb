@@ -13,12 +13,13 @@ function Login() {
         e.preventDefault()
         httpPost('api/login/', {username: username, password: password})
             .then((res) => {
-                 localStorage.setIte('token', res.data.access)
+            
+                localStorage.setItem('token', res.data.access)
                  history.push('/perfil')
-            }).catch((err)=>{
-                    console.log(err)
+            }).catch((err)=> alert.show('No se ha podido loguear',{
+                type: "error"
 
-            })
+            }))
       }
     
     return (

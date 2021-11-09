@@ -17,15 +17,15 @@ function Singin () {
         e.preventDefault()
         httpPost ("api/register/", {
             username:username,
-            first_name:name,
+            password:password,
             Last_name:lastname,
             email:email,
-            password:password
+            first_name:name
         }).then(res => {
             alert.show('Se ha creado el usuario ',{
                 type: "success"
             })
-            history.push("/S-signin")
+            history.push("/Ssignin")
 
         }
         ).catch(err=> alert.show('No se ha podido crear el usuario',{
