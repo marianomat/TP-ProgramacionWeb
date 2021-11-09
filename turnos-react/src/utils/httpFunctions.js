@@ -11,7 +11,11 @@ export const httpGet = async (endpoint) => {
 }
 
 export const httpPost = async (endpoint, data) => {
-    return axios.post(baseURL + endpoint, data).then((res) => {
+    return axios.post(baseURL + endpoint, data,{
+        headers: {
+          authorization: 'Bearer ' + localStorage.getItem('token')
+        }
+      } ).then((res) => {
         return res.data;
     })
 }
