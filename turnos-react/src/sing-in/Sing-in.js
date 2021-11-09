@@ -1,9 +1,13 @@
 import "./Sing-in.css"
 import {useEffect, useState} from "react";
 import { httpPost } from "../utils/httpFunctions";
+import { useAlert } from "react-alert";
+import {useHistory} from "react-router-dom"
 //<a href="Ssignin" class="botons">Registrarme</a>
 
 function Singin () {
+    const history = useHistory()
+    const alert = useAlert ()
     const [ name, setName] = useState("")
     const [ lastname, setLastname] = useState("")
     const [ username, setUsername] = useState("")
@@ -13,11 +17,20 @@ function Singin () {
         e.preventDefault()
         httpPost ("api/register/", {
             username:username,
-            first_name:name,
+            password:password,
             Last_name:lastname,
             email:email,
-            password:password
-        }).then(res => window.alert(res)).catch(err=> window.alert(err))
+            first_name:name
+        }).then(res => {
+            alert.show('Se ha creado el usuario ',{
+                type: "success"
+            })
+            history.push("/Ssignin")
+
+        }
+        ).catch(err=> alert.show('No se ha podido crear el usuario',{
+            type: "error"
+        }))
     }
     return ( 
     <div className = "general">
@@ -55,7 +68,7 @@ function Singin () {
             <label for="imagen">Imagen </label>
             <input type="file" id="imagen" />
         </div>
-        <button type= "submit"><a href="Ssignin" class="botons">Registrarme</a></button>
+        <button type= "submit" class="botons" >Registrarme</button>
     </form>
  </div>
  </div>

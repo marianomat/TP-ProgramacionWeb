@@ -42,6 +42,13 @@ function Horarios() {
     const createTurnos = async (e) => {
         try {
             e.preventDefault()
+            if(selectedDays.selectedDays.length === 0) {
+                alert.show("Debe seleccionar un dia",{
+                    type: "info"
+                })
+                return
+            }
+
             for (const day of selectedDays.selectedDays) {
                 let startHourISO = makeDateTime(day,turnosStartHour);
                 for(let i = 0; i < turnosDayCount; i++ ) {
@@ -50,11 +57,12 @@ function Horarios() {
                         hour: new Date(startHourISO).toISOString()
                     })
                     startHourISO = startHourISO + (60000 * turnosDuration)
+                    alert.show('Turno/s creado correctamente',{
+                        type: "success"
+                    })
                 }
             }
-            alert.show('Turno/s creado correctamente',{
-                type: "success"
-            })
+
         } catch (error) {
             alert.show('Error en la creación, intente mas tarde!',{
                 type: "error"
@@ -86,7 +94,7 @@ function Horarios() {
             <h2>Habilitar turnos</h2>
             <div className="horarios-contenido-items">
                 <div className="contenido-calendario">
-                    <DayPicker onDayClick={handleDayClick} selectedDays={selectedDays.selectedDays}  disabledDays={disabledDays} />
+                    <DayPicker onDayClick={handleDayClick} selectedDays={selectedDays.selectedDays}  disabledDays={[...disabledDays, {before: new Date()}]} />
                 </div>
                 <div className="horarios-contenedor">
                     <h5>Seleccione la franja horaria</h5>
