@@ -18,7 +18,7 @@ function Singin () {
         httpPost ("api/register/", {
             username:username,
             password:password,
-            Last_name:lastname,
+            last_name:lastname,
             email:email,
             first_name:name
         }).then(res => {

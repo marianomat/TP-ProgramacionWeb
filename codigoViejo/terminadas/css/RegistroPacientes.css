@@ -57,7 +57,7 @@
   body {
     /*background-color: darkblue;*/
     /*opacity: 0.4;*/
-    background-image: url("/codigoViejo/FondoRegistroPacientes.jpg");
+    background-image: url("/turnos-react/src/RegistroPacientes/FondoRegistroPacientes.jpg");
     background-attachment: fixed;
     color: white;
     /*background-repeat: no-repeat;
