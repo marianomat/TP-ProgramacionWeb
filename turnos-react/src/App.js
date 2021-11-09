@@ -12,7 +12,7 @@ import Inicio from './P-inicio/Login';
 import Login from './P-inicio/Login';
 import Singin from './sing-in/Sing-in';
 import Ssignin from './S-signin/S-signin';
-
+import RegistroPacientes from './RegistroPacientes/RegistroPacientes';
 
 function App() {
   return (
@@ -20,16 +20,18 @@ function App() {
           <Switch>
             <Route path="/perfil">
               <Perfil />
-              </Route>
+            </Route>
             <Route path="/Singin">
               <Singin/>
             </Route>
-            
             <Route path="/login">
               <Login/>
             </Route>
             <Route path="/Ssignin">
               <Ssignin/>
+            </Route>
+            <Route path="/RegistroPacientes">
+              <RegistroPacientes/>
             </Route>
             <Route path="/">
               <Home />
