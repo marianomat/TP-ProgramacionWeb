@@ -9,7 +9,8 @@ import {useAlert} from "react-alert";
 function Turnos() {
     const alert = useAlert()
     const [turnos, setTurnos] = useState([]);
-    const [diaSeleccionado, setDiaSeleccionado] = useState(getToday())
+    const [cantidadTurnos, setCantidadTurnos] = useState(0)
+   // const [diaSeleccionado, setDiaSeleccionado] = useState(getToday())
     const fetchTurnos = () => {
         //No olvidar la barra al final de turnos
         httpGet("api/turnos/")
@@ -19,6 +20,7 @@ function Turnos() {
                     day.horario += new Date(day.hour).toLocaleTimeString() + " hs"
                 }
                 setTurnos(data)
+                setCantidadTurnos(data.length)
             }).catch((err) => {
                 alert.show('Error obtenido los turnos, intente mas tarde!',{
                     type: "error"
@@ -41,7 +43,7 @@ function Turnos() {
     //va a ejecutarse la primer funcion.
     //Si pasamos un array vacio para que solamente se corra al principio
     // Si no ponemos nada , cada cambio que se produzca en el componente se corre la funcion (costoso)
-    useEffect(fetchTurnos, [turnos]);
+    useEffect(fetchTurnos, [cantidadTurnos]);
     return (
         <div className="turnos-contenido">
             <div className="turnos-contenido-tabla">
