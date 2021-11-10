@@ -13,14 +13,15 @@ import Login from './P-inicio/Login';
 import Singin from './sing-in/Sing-in';
 import Ssignin from './S-signin/S-signin';
 import RegistroPacientes from './RegistroPacientes/RegistroPacientes';
+import AuthRoute from "./AuthRoute";
 
 function App() {
   return (
       <Router>
           <Switch>
-            <Route path="/perfil">
-              <Perfil />
-            </Route>
+            <AuthRoute exact={false} path={`/perfil`}>
+                <Perfil />
+            </AuthRoute>
             <Route path="/Singin">
               <Singin/>
             </Route>

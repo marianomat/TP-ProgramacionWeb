@@ -60,6 +60,7 @@ function Horarios() {
                     alert.show('Turno/s creado correctamente',{
                         type: "success"
                     })
+                    fetchTurnos()
                 }
             }
 
@@ -87,7 +88,7 @@ function Horarios() {
         }
     }
 
-    useEffect(fetchTurnos, [disabledDays] )
+    useEffect(fetchTurnos, [] )
 
     return (
         <div className="horarios-contenido">
