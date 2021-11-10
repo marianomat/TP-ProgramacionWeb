@@ -16,7 +16,7 @@ class TurnoViewSet(viewsets.ModelViewSet):
     queryset = Turno.objects.all()  # Se pueden filtrar con los metodos
 
 
-# CreateAPIView solo crea la parte de CREATE del AMB
+# CreateAPIView solo crea la parte de CREATE del ABM
 # Solo necesitamos una sola ruta POST para crear un usuario
 # El queryset no hace falta ya que solo es necesario para rutas que hay que indicar un conjunto de datos con los que trabaje
 class RegisterView(generics.CreateAPIView):

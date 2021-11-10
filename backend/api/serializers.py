@@ -14,7 +14,6 @@ class TurnoSerializer(serializers.ModelSerializer):
 class RegisterSerializer(serializers.ModelSerializer):
     # Esto hace que no se envie la password encriptada en el response body, solo lo tiene en cuenta al momento de recibir
     password = serializers.CharField(write_only=True)
-
     class Meta:
         model = get_user_model()
         fields = ["username", "password" , "last_name","email", "first_name"]

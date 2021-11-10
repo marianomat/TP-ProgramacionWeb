@@ -17,9 +17,10 @@ class Turno(models.Model):
     description = models.TextField(blank=True, null=True, default="--")
     is_payed = models.BooleanField(blank=True, null=True, default=False)
     doctor = models.TextField(blank=True, default="test")
-    patient_name = models.TextField(blank=True, null=True, default="TURNO")
-    patient_lastName = models.TextField(blank=True, null=True, default="DISPONIBLE")
+    patient_name = models.TextField(blank=True, null=True, default="--")
+    patient_lastName = models.TextField(blank=True, null=True, default="--")
     patient_phone = models.TextField(blank=True, default="--")
+    patient_email = models.TextField(blank=True, default="--")
     # HAY QUE PONER ESTA FOREIGN
     # doctor = models.ForeignKey(
     #     get_user_model(),
