@@ -23,6 +23,9 @@ class RegisterSerializer(serializers.ModelSerializer):
         user = get_user_model().objects.create_user(
             # El metodo create_user crea el usuario con la password encriptada
             username=validated_data['username'],
+            last_name=validated_data['last_name'],
+            first_name=validated_data['first_name'],
+            email=validated_data['email'],
             password=validated_data['password']
             # Validated_date diccionario con los fields de la request
         )
