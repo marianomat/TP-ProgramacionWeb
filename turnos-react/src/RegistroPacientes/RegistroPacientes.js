@@ -10,10 +10,10 @@ import {Link} from "react-router-dom";
 
 function RegistroPacientes(props) {
   const alert = useAlert()
-  const [registropacientes, setTurnos] = useState([]);
-  const {id} = useParams()
+  const [registropacientes, setTurnos] = useState([])
   const [turno, setTurno] = useState({})
   const [cantidadTurnos, setCantidadTurnos] = useState(0)
+  const [id, setid] = useState()
 
   const fetchTurnos = () => {
     //No olvidar la barra al final de turnos
@@ -33,19 +33,14 @@ function RegistroPacientes(props) {
     )
   }
 
-  const getTurno = (id) => {
-      httpGet("api/turnos/" + id).then((res) => {
-          setTurno(res)
-      }).catch((err) => window.alert(err))
-  }
-
   const editTurno = (e) => {
       e.preventDefault()
+      console.log(turno)
       httpPut("api/turnos/" + id + "/", turno).then((res) => {
           alert.show('Turno modificado correctamente',{
               type: "success"
           })
-      }).catch((err) => alert.show('No se pudo modificar, intente mas tarde!',{
+      }).catch((err) => alert.show(".",{
           type: "error"
       }))
 
@@ -61,8 +56,7 @@ function RegistroPacientes(props) {
         }))
 }
 
-  useEffect((ID) => getTurno(id), [])
-  useEffect(fetchTurnos, [cantidadTurnos]);
+  useEffect(fetchTurnos,[]);
     return (
         <div className="registropaciente-contenedor">
             <title>Página Turnos</title>
@@ -77,35 +71,44 @@ function RegistroPacientes(props) {
               </h2>
               <form className="registropaciente-tit" onSubmit ={(e) => editTurno(e)} >
                 <div className="registropaciente-input-grupo">
-                  <label for="name">Nombre:</label>
-                  <input id="nombre" value={turno.patient_name ? turno.patient_name : "NOMBRE"}
+                  <label for="nombre">Nombre:</label>
+                  <input id="nombre" value={turno.patient_name ? turno.patient_name : ""} placeholder="Nombre"
                            onChange={(e) => setTurno({...turno, patient_name:e.target.value})}/>
                 </div>
                 <div className="registropaciente-input-grupo">
-                  <label for="lastname">Apellido:</label>
-                  <input id="apellido" value={turno.patient_lastName ? turno.patient_lastName : "APELLIDO"}
+                  <label for="apellido">Apellido:</label>
+                  <input id="apellido" value={turno.patient_lastName ? turno.patient_lastName : ""} placeholder="Apellido"
                            onChange={(e) => setTurno({...turno, patient_lastName:e.target.value})}/>
                 </div>
                 <div className="registropaciente-input-grupo">
-                  <label for="number">Número celular:</label>
-                  <input id="numero" value={turno.patient_phone ? turno.patient_phone : "NUMERO/CELULAR"}
+                  <label for="numero">Número celular:</label>
+                  <input id="numero" value={turno.patient_phone ? turno.patient_phone : ""} placeholder="Numero"
                            onChange={(e) => setTurno({...turno, patient_phone:e.target.value})}/>
                 </div>
                 <div className="registropaciente-input-grupo">
-                  <label for="mail">Correo electrónico:</label>
-                  <input id="email" value={turno.patient_email ? turno.patient_email : "CORREO ELECTRONICO"}
+                  <label for="email">Correo electrónico:</label>
+                  <input id="email" value={turno.patient_email ? turno.patient_email : ""} placeholder="Mail"
                            onChange={(e) => setTurno({...turno, patient_email:e.target.value})}/>
                 </div>
+
                 <div className="registropaciente-input-grupo">
-                  <label for="turnosdisponibles">Turnos Disponibles</label>
-                  <input type="" id="turno" name="user_turno"/>
-                </div>
-                <div className="registropaciente-input-grupo">
-                  <label for="pago">Pago de turno</label>
-                    <select name="Pago" id='pagoturno' className="botons"
+                  <label for="pagoturno">Pago de turno</label>
+                    <select name="Pago" id='pagoturno' className="botons" value = {turno.is_payed}
                       onChange={(e) => setTurno({...turno, is_payed:e.target.value})}>
-                        <option value= "true" >Pagado</option>
-                        <option value= "false" >No pagado</option>
+                        <option value= {true}>Pagado</option>
+                        <option value= {false}>No pagado</option>
+                    </select>
+               </div>
+
+               <div className="registropaciente-input-grupo">
+                  <label for="fechaturno">Fecha de turnos disponibles</label>
+                  <select name="Fecha" id='fechaturno' className="botons" value = {turno.hour}
+                    onChange={(e) => setid(e.target.value)}>
+                      {registropacientes.map(turno => {
+                        return(
+                          <option value= {turno.id}> {turno.hour} </option>
+                        )   
+                    })}
                     </select>
                </div>
                 <button type="submit"> Enviar formulario </button>
