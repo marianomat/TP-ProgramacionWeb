@@ -8,7 +8,6 @@ function Login() {
     const alert = useAlert()
     const [ username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-
     const login = (e) => {
         e.preventDefault()
         httpPost('api/login/', {username: username, password: password})
@@ -29,7 +28,7 @@ function Login() {
                 <form className="center-login" onSubmit={(e) => login(e)}>
                     <h1>Ingrese sus datos</h1>
                     <div className="input-grupo">
-                        <label for="userName">userName</label>
+                        <label for="userName">UserName</label>
                         <input id="userName" placeholder="UserName" value={username}
                             onChange={(e) => setUsername(e.target.value)}  />
                     </div>

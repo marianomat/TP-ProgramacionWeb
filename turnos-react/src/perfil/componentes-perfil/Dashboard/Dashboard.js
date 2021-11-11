@@ -40,7 +40,7 @@ function Dashboard() {
         <div className="dashboard-contenido">
             <div className="dashboard-contenido-header">
                 <h3 className="dashboard-contenido-titulo">Bienvenido</h3>
-                <a className="dashboard-contenido-pagina-a" href="#"><p className="dashboard-contenido-pagina">Ver pagina de turnos <i
+                <a className="dashboard-contenido-pagina-a" href="../RegistroPacientes/RegistroPacientes.js"><p className="dashboard-contenido-pagina">Ver pagina de turnos <i
                     className="fas fa-location-arrow"></i></p></a>
             </div>
             <div className="dashboard-contenido-info">

@@ -38,8 +38,8 @@ function Turnos() {
                 type: "error"
             }))
     }
-    //UseEffect tiene dos argumentos, el primero una funcion (referencia, no el valro de retorno) que se ejecuta
-    //El segundo es un array de dependencais, que son variables que React observa y cuando cambie alguna de ellas
+    //UseEffect tiene dos argumentos, el primero una funcion (referencia, no el valor de retorno) que se ejecuta
+    //El segundo es un array de dependencias, que son variables que React observa y cuando cambie alguna de ellas
     //va a ejecutarse la primer funcion.
     //Si pasamos un array vacio para que solamente se corra al principio
     // Si no ponemos nada , cada cambio que se produzca en el componente se corre la funcion (costoso)

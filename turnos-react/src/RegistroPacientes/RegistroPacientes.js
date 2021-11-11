@@ -1,6 +1,68 @@
 import React from "react";
 import './RegistroPacientes.css'
-const RegistroPacientes = () => {
+import "../perfil/componentes-perfil/Turnos/Turnos.css";
+import {httpGet, httpDelete, httpPut} from "../utils/httpFunctions";
+import {useAlert} from "react-alert";
+import {useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {getToday} from "../utils/helpers";
+import {Link} from "react-router-dom";
+
+function RegistroPacientes(props) {
+  const alert = useAlert()
+  const [registropacientes, setTurnos] = useState([]);
+  const {id} = useParams()
+  const [turno, setTurno] = useState({})
+  const [cantidadTurnos, setCantidadTurnos] = useState(0)
+
+  const fetchTurnos = () => {
+    //No olvidar la barra al final de turnos
+    httpGet("api/turnos/")
+        .then((data) => {
+            for(let day of data) {
+                day.horario = new Date(day.hour).toLocaleDateString() + " "
+                day.horario += new Date(day.hour).toLocaleTimeString() + " hs"
+            }
+            setTurnos(data)
+            setCantidadTurnos(data.length)
+        }).catch((err) => {
+            alert.show('Error obtenido los turnos, intente mas tarde!',{
+                type: "error"
+            })
+        }
+    )
+  }
+
+  const getTurno = (id) => {
+      httpGet("api/turnos/" + id).then((res) => {
+          setTurno(res)
+      }).catch((err) => window.alert(err))
+  }
+
+  const editTurno = (e) => {
+      e.preventDefault()
+      httpPut("api/turnos/" + id + "/", turno).then((res) => {
+          alert.show('Turno modificado correctamente',{
+              type: "success"
+          })
+      }).catch((err) => alert.show('No se pudo modificar, intente mas tarde!',{
+          type: "error"
+      }))
+
+  }
+
+  const handleDelete = (id) => {
+    httpDelete("api/turnos/" + id)
+        .then((res) => alert.show('Eliminado correctamente!',{
+            type: "success"
+        }))
+        .catch(err => alert.show('No se pudo eliminar, intente mas tarde!',{
+            type: "error"
+        }))
+}
+
+  useEffect((ID) => getTurno(id), [])
+  useEffect(fetchTurnos, [cantidadTurnos]);
     return (
         <div className="registropaciente-contenedor">
             <title>Página Turnos</title>
@@ -10,28 +72,79 @@ const RegistroPacientes = () => {
               </h1>
             </div>
             <div>
-              <h2  class="registropaciente-tit">
+              <h2  className="registropaciente-tit">
                 Complete el siguiente formulario
               </h2>
-              <form class="registropaciente-tit">
-                <div class="registropaciente-input-grupo">
+              <form className="registropaciente-tit" onSubmit ={(e) => editTurno(e)} >
+                <div className="registropaciente-input-grupo">
                   <label for="name">Nombre:</label>
-                  <input type="text" id="name" name="user_name"/>
+                  <input id="nombre" value={turno.patient_name ? turno.patient_name : "NOMBRE"}
+                           onChange={(e) => setTurno({...turno, patient_name:e.target.value})}/>
                 </div>
-                <div class="registropaciente-input-grupo">
+                <div className="registropaciente-input-grupo">
                   <label for="lastname">Apellido:</label>
-                  <input type="text" id="lastname" lastname="user_lastname"/>
+                  <input id="apellido" value={turno.patient_lastName ? turno.patient_lastName : "APELLIDO"}
+                           onChange={(e) => setTurno({...turno, patient_lastName:e.target.value})}/>
                 </div>
-                <div class="registropaciente-input-grupo">
+                <div className="registropaciente-input-grupo">
                   <label for="number">Número celular:</label>
-                  <input type="text" id="number" number="user_number"/>
+                  <input id="numero" value={turno.patient_phone ? turno.patient_phone : "NUMERO/CELULAR"}
+                           onChange={(e) => setTurno({...turno, patient_phone:e.target.value})}/>
                 </div>
-                <div class="registropaciente-input-grupo">
+                <div className="registropaciente-input-grupo">
                   <label for="mail">Correo electrónico:</label>
-                  <input type="email" id="mail" name="user_mail"/>
+                  <input id="email" value={turno.patient_email ? turno.patient_email : "CORREO ELECTRONICO"}
+                           onChange={(e) => setTurno({...turno, patient_email:e.target.value})}/>
                 </div>
+                <div className="registropaciente-input-grupo">
+                  <label for="turnosdisponibles">Turnos Disponibles</label>
+                  <input type="" id="turno" name="user_turno"/>
+                </div>
+                <div className="registropaciente-input-grupo">
+                  <label for="pago">Pago de turno</label>
+                    <select name="Pago" id='pagoturno' className="botons"
+                      onChange={(e) => setTurno({...turno, is_payed:e.target.value})}>
+                        <option value= "true" >Pagado</option>
+                        <option value= "false" >No pagado</option>
+                    </select>
+               </div>
                 <button type="submit"> Enviar formulario </button>
               </form>
+
+{/*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+
+              <div className="turnos-contenido">
+            <div className="turnos-contenido-tabla">
+                <h2>Turnos</h2>
+                {/*<div className="turnos-form-grupo">*/}
+                {/*    <label htmlFor="fechas-turnos">Seleccionar Fecha</label>*/}
+                {/*    <input id="fechas-turnos" type="date"/>*/}
+                {/*</div>*/}
+                {/*<h6>Turnos para el {today}</h6>*/}
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Horario</th>
+                        <th>Modificar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {registropacientes.map(turno => {
+                        return (
+                            <tr key={turno.id}>
+                                <td className="turnos-td-horario">{turno.horario}</td>
+                                <td className="turnos-td-edit">
+                                    <Link to={"/perfil/turnos/" + turno.id} test={"asd"}><i className="fas fa-edit"></i> </Link>
+                                </td>
+                                <td onClick={() => {handleDelete(turno.id)}} className="turnos-td-delete"><i className="fas fa-trash-alt"></i></td>
+                            </tr>
+                        )
+                    })}
+                    </tbody>
+                </table>
+            </div>
+        </div>
             </div>
         </div>
     );
