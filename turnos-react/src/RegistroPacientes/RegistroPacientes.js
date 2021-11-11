@@ -16,7 +16,7 @@ function RegistroPacientes(props) {
   const [id, setid] = useState()
 
   const fetchTurnos = () => {
-    //No olvidar la barra al final de turnos
+    ///No olvidar la barra al final de turnos
     httpGet("api/turnos/")
         .then((data) => {
             for(let day of data) {
