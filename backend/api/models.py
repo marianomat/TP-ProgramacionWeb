@@ -19,12 +19,15 @@ class Turno(models.Model):
     doctor = models.TextField(blank=True, default="test")
     patient_name = models.TextField(blank=True, null=True, default="TURNO")
     patient_lastName = models.TextField(blank=True, null=True, default="DISPONIBLE")
-    patient_phone = models.TextField(blank=True, default="--")
+    patient_phone = models.TextField(blank=True, default="---")
+    created_at = models.DateTimeField(editable=False, auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(editable=False, auto_now_add=True, null=True)
     # HAY QUE PONER ESTA FOREIGN
-    # doctor = models.ForeignKey(
-    #     get_user_model(),
-    #     on_delete=models.CASCADE,
-    # )
+    doctor = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE,
+        related_name="turnos"
+    )
 
 
 

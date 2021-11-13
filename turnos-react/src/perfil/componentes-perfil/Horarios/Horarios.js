@@ -10,7 +10,8 @@ import {useAlert} from "react-alert";
 // Utiliza el State para determinar que dias son seleccionados.
 
 // AGREGAR https://react-day-picker.js.org/examples/selected-multiple/
-function Horarios() {
+function Horarios(props) {
+    const user = props.user;
     const alert = useAlert()
     const [selectedDays, setDay ] = useState({selectedDays: []}); // Generamos el estado para los dias seleccionados
     const [disabledDays, setDisabledDays] = useState("")
@@ -53,18 +54,20 @@ function Horarios() {
                 let startHourISO = makeDateTime(day,turnosStartHour);
                 for(let i = 0; i < turnosDayCount; i++ ) {
                     await httpPost("api/turnos/", {
-                        doctor: "mariano",
+                        doctor: user.id,
                         hour: new Date(startHourISO).toISOString()
                     })
                     startHourISO = startHourISO + (60000 * turnosDuration)
                     alert.show('Turno/s creado correctamente',{
                         type: "success"
                     })
+                    setDay({selectedDays: []})
                     fetchTurnos()
                 }
             }
 
         } catch (error) {
+            console.log(error)
             alert.show('Error en la creación, intente mas tarde!',{
                 type: "error"
             })

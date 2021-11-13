@@ -15,12 +15,23 @@ import Datos from "./componentes-perfil/Datos/Datos";
 import DatosForm from "./componentes-perfil/DatosForm/DatosForm";
 import {useState} from "react";
 import TurnosForm from "./componentes-perfil/TurnosForm/TurnosForm";
+import {httpGet} from "../utils/httpFunctions";
 
 function Perfil() {
     //Usamos el state para ir cambiando la visiblidad del menu en version mobile
     //Cuando se invoca esta funcion handleCallback cambia el estado de visible a hidden y viceversa
     //El state es usado por el elemento hijo MenuPerfil para determinar si tiene o no que ser visible
     const [menuVisible, setMenuVisible] = useState("hidden");
+    const [user, setUser] = useState({});
+
+    const fetchUser = () => {
+        httpGet("api/me").then(res => {
+            setUser(res)
+        }).catch((err) => {
+            "Error cargando datos del usuario"
+        })
+
+    }
     function handleCallback() {
         menuVisible === "hidden" ? setMenuVisible("visible") : setMenuVisible("hidden");
     }
@@ -28,32 +39,33 @@ function Perfil() {
     function handleCerrarMenu() {
         setMenuVisible("hidden");
     }
+    useState(fetchUser, []);
     return (
         <div>
-            <NavPerfil handleClick={handleCallback}/>
+            <NavPerfil handleClick={handleCallback} user={user}/>
             <section className="main">
                 <MenuPerfil visibilidadMenu={menuVisible} handleCerrarMenu={handleCerrarMenu}/>
                 <Switch>
                     <Route path="/perfil/turnos/:id">
-                        <TurnosForm />
+                        <TurnosForm user={user}/>
                     </Route>
                     <Route path="/perfil/turnos">
-                        <Turnos />
+                        <Turnos user={user}/>
                     </Route>
                     <Route path="/perfil/horarios">
-                        <Horarios />
+                        <Horarios user={user}/>
                     </Route>
                     <Route path="/perfil/pagos">
-                        <Pagos />
+                        <Pagos user={user}/>
                     </Route>
                     <Route path="/perfil/datos/form">
-                        <DatosForm />
+                        <DatosForm user={user}/>
                     </Route>
                     <Route path="/perfil/datos">
-                        <Datos />
+                        <Datos user={user}/>
                     </Route>
                     <Route path="/perfil/">
-                        <Dashboard />
+                        <Dashboard user={user}/>
                     </Route>
                 </Switch>
             </section>
