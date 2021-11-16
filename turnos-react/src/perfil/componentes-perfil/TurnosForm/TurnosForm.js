@@ -3,11 +3,13 @@ import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {httpGet, httpPut} from "../../../utils/httpFunctions";
 import {useAlert} from "react-alert";
+import {useHistory} from "react-router-dom"
 
 function TurnosForm(props) {
     const alert = useAlert()
     const {id} = useParams()
     const [turno, setTurno] = useState({})
+    let history = useHistory();
 
     const getTurno = (id) => {
         httpGet("api/turnos/" + id).then((res) => {
@@ -18,6 +20,7 @@ function TurnosForm(props) {
     const editTurno = (e) => {
         e.preventDefault()
         httpPut("api/turnos/" + id + "/", turno).then((res) => {
+            history.push('/perfil/turnos')
             alert.show('Turno modificado correctamente',{
                 type: "success"
             })

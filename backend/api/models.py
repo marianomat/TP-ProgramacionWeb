@@ -14,12 +14,12 @@ class Turno(models.Model):
     # &index=27
     is_taken = models.BooleanField(blank=True, null=True, default=False)
     hour = models.DateTimeField(blank=False, null=False)
-    description = models.TextField(blank=True, null=True, default="--")
+    description = models.TextField(blank=True, null=True, default="--", max_length=100)
     is_payed = models.BooleanField(blank=True, null=True, default=False)
     doctor = models.TextField(blank=True, default="test")
-    patient_name = models.TextField(blank=True, null=True, default="TURNO")
-    patient_lastName = models.TextField(blank=True, null=True, default="DISPONIBLE")
-    patient_phone = models.TextField(blank=True, default="---")
+    patient_name = models.TextField(blank=True, null=True, default="TURNO", max_length=30)
+    patient_lastName = models.TextField(blank=True, null=True, default="DISPONIBLE", max_length=30)
+    patient_phone = models.TextField(blank=True, default="---", max_length=30)
     created_at = models.DateTimeField(editable=False, auto_now_add=True, null=True)
     updated_at = models.DateTimeField(editable=False, auto_now_add=True, null=True)
     # HAY QUE PONER ESTA FOREIGN
@@ -29,7 +29,16 @@ class Turno(models.Model):
         related_name="turnos"
     )
 
-
+class Pago(models.Model):
+    monto = models.IntegerField(null=True, default=False)
+    payment_code = models.IntegerField(null=True)
+    created_at = models.DateTimeField(editable=False, auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(editable=False, auto_now_add=True, null=True)
+    doctor = models.ForeignKey(
+        Turno,
+        on_delete=models.CASCADE,
+        related_name="pagos"
+    )
 
 
 

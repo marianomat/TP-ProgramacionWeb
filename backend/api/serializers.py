@@ -1,10 +1,13 @@
 from django.contrib.auth import get_user_model
-from rest_framework import serializers
+from rest_framework import serializers, permissions
 
 from api.models import Turno
 
 
 # Traduce el objeto a json
+from api.models import Pago
+
+
 class TurnoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Turno
@@ -36,4 +39,9 @@ class RegisterSerializer(serializers.ModelSerializer):
 class MeSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
+        fields = "__all__"
+
+class PagoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Pago
         fields = "__all__"

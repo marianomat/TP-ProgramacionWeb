@@ -58,6 +58,7 @@ function Turnos() {
                 <table>
                     <thead>
                     <tr>
+                        <th>Código</th>
                         <th>Horario</th>
                         <th>Paciente</th>
                         <th>Telefono</th>
@@ -71,6 +72,7 @@ function Turnos() {
                     {turnos.map(turno => {
                         return (
                             <tr key={turno.id}>
+                                <td className="turnos-td-horario">{turno.id}</td>
                                 <td className="turnos-td-horario">{turno.horario}</td>
                                 <td>{turno.patient_name + " " + turno.patient_lastName}</td>
                                 <td>{turno.patient_email}</td>
