@@ -41,3 +41,13 @@ export const httpPut = async (endpoint, data) => {
         return res.data;
     })
 }
+
+export const httpPatch = async (endpoint, data) => {
+    return axios.patch(baseURL + endpoint, data,{
+        headers: {
+            authorization:  "Bearer " + localStorage.getItem('token')
+        }
+    }).then((res) => {
+        return res.data;
+    })
+}

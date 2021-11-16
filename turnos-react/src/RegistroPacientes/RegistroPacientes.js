@@ -1,7 +1,7 @@
 import React from "react";
 import './RegistroPacientes.css'
 import "../perfil/componentes-perfil/Turnos/Turnos.css";
-import {httpGet, httpDelete, httpPut} from "../utils/httpFunctions";
+import {httpGet, httpDelete, httpPut, httpPatch, httpPost} from "../utils/httpFunctions";
 import {useAlert} from "react-alert";
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
@@ -12,9 +12,36 @@ function RegistroPacientes(props) {
   const alert = useAlert()
   const [registropacientes, setTurnos] = useState([])
   const [turno, setTurno] = useState({})
+  const [pago, setPago] = useState({})
   const [cantidadTurnos, setCantidadTurnos] = useState(0)
   const [id, setid] = useState()
+ /*  const [turnoseleccionado, setTurnoSeleccionado] = useState ({}) */
+function optionpago() {
+  let turnoselec = ""
+    for (let i in turno){
+      if (i.id == id){
+        turnoselec = i
+      }
+    }
+    if (turnoselec != "" && turnoselec.is_payed == false)
+    { return (
+      <div>
+        <div className="registropaciente-input-grupo">
+          <label for="monto">Monto:</label>
+          <input id="monto" value={pago.monto ? pago.monto : ""} placeholder="$"
+                  onChange={(e) => setPago({...pago, monto:e.target.value})}/>
+          </div>
 
+          <div className="registropaciente-input-grupo">
+          <label for="codigopago">Codigo Pago</label>
+          <input id="codigopago" value={pago.payment_code ? pago.payment_code: ""} placeholder="- - - -"
+                  onChange={(e) => setPago({...pago, payment_code:e.target.value})}/>
+          </div>
+      </div>
+    )}
+
+  
+}
   const fetchTurnos = () => {
     ///No olvidar la barra al final de turnos
     httpGet("api/turnos/")
@@ -34,18 +61,23 @@ function RegistroPacientes(props) {
   }
 
   const editTurno = (e) => {
-      e.preventDefault()
-      console.log(turno)
-      httpPut("api/turnos/" + id + "/", turno).then((res) => {
-          alert.show('Turno modificado correctamente',{
-              type: "success"
-          })
-      }).catch((err) => alert.show(".",{
-          type: "error"
-      }))
-
-  }
-
+    e.preventDefault()
+    console.log(turno)
+    httpPatch("api/turnos/" + id + "/", turno).then((res) => {
+        alert.show('Turno modificado correctamente',{
+            type: "success"
+        })
+    }).catch((err) => alert.show("Error",{
+        type: "error"
+    }))
+    httpPost("api/pagos/").then((res) => {
+      alert.show('Pago modificado correctamente',{
+          type: "success"
+      })
+      }).catch((err) => alert.show("Error",{
+        type: "error"
+    }))
+}
   const handleDelete = (id) => {
     httpDelete("api/turnos/" + id)
         .then((res) => alert.show('Eliminado correctamente!',{
@@ -94,60 +126,29 @@ function RegistroPacientes(props) {
                 <div className="registropaciente-input-grupo">
                   <label for="pagoturno">Pago de turno</label>
                     <select name="Pago" id='pagoturno' className="botons" value = {turno.is_payed}
-                      onChange={(e) => setTurno({...turno, is_payed:e.target.value})}>
+                      onChange={(e) => setTurno({...turno, is_payed:e.target.value})}> 
+                      {/* /* onChange={optionpago}> */}
                         <option value= {true}>Pagado</option>
                         <option value= {false}>No pagado</option>
-                    </select>
+                    </select>    
+                    {
+                      optionpago ()
+                    } 
                </div>
-
+               
                <div className="registropaciente-input-grupo">
                   <label for="fechaturno">Fecha de turnos disponibles</label>
                   <select name="Fecha" id='fechaturno' className="botons" value = {turno.hour}
                     onChange={(e) => setid(e.target.value)}>
                       {registropacientes.map(turno => {
                         return(
-                          <option value= {turno.id}> {turno.hour} </option>
+                          <option value= {turno.id}> {turno.horario} </option>
                         )   
                     })}
                     </select>
                </div>
                 <button type="submit"> Enviar formulario </button>
               </form>
-
-{/*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
-
-              <div className="turnos-contenido">
-            <div className="turnos-contenido-tabla">
-                <h2>Turnos</h2>
-                {/*<div className="turnos-form-grupo">*/}
-                {/*    <label htmlFor="fechas-turnos">Seleccionar Fecha</label>*/}
-                {/*    <input id="fechas-turnos" type="date"/>*/}
-                {/*</div>*/}
-                {/*<h6>Turnos para el {today}</h6>*/}
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Horario</th>
-                        <th>Modificar</th>
-                        <th>Eliminar</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {registropacientes.map(turno => {
-                        return (
-                            <tr key={turno.id}>
-                                <td className="turnos-td-horario">{turno.horario}</td>
-                                <td className="turnos-td-edit">
-                                    <Link to={"/perfil/turnos/" + turno.id} test={"asd"}><i className="fas fa-edit"></i> </Link>
-                                </td>
-                                <td onClick={() => {handleDelete(turno.id)}} className="turnos-td-delete"><i className="fas fa-trash-alt"></i></td>
-                            </tr>
-                        )
-                    })}
-                    </tbody>
-                </table>
-            </div>
-        </div>
             </div>
         </div>
     );

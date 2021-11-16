@@ -2,15 +2,21 @@ import "./Dashboard.css"
 import {useEffect, useState} from "react";
 import {httpGet} from "../../../utils/httpFunctions";
 import {useAlert} from "react-alert";
+import {Link} from "react-router-dom";
 
-function Dashboard() {
+function Dashboard(props) {
     const alert = useAlert()
     const [proximoTurno, setProximoTurno] = useState(null)
     const [turnos, setTurnos] = useState([])
 
     const getTurno = () => {
         httpGet("api/turnos/").then((res) => {
-            setProximoTurno(res[0])
+            for(let turno of res) {
+                if(turno.is_taken) {
+                    setProximoTurno(turno)
+                    break
+                }
+            }
             setTurnos(res)
         }).catch(err => {
             alert.show('No se puede obtener información de los turnos',{
@@ -40,8 +46,8 @@ function Dashboard() {
         <div className="dashboard-contenido">
             <div className="dashboard-contenido-header">
                 <h3 className="dashboard-contenido-titulo">Bienvenido</h3>
-                <a className="dashboard-contenido-pagina-a" href="../RegistroPacientes/RegistroPacientes.js"><p className="dashboard-contenido-pagina">Ver pagina de turnos <i
-                    className="fas fa-location-arrow"></i></p></a>
+                <Link className="dashboard-contenido-pagina-a" to={"registropacientes/?doctor_id=" + props.user.id}><p className="dashboard-contenido-pagina">Ver pagina de turnos <i
+                    className="fas fa-location-arrow"></i></p></Link>
             </div>
             <div className="dashboard-contenido-info">
                 <div id="dashboard-contenido-info-cuadro1" className="dashboard-contenido-info-cuadro">
@@ -56,10 +62,10 @@ function Dashboard() {
                 <div className="dashboard-contenido-info-cuadro">
                     <h6>Proximo turno</h6>
                     <ul>
-                        <li>Fecha: {proximoTurno ? proximoTurno.hour.split("T")[0] : "Esperando datos.."}</li>
-                        <li>Hora: {proximoTurno ? proximoTurno.hour.split("T")[1].slice(0,-1) : "Esperando datos.."}</li>
-                        <li>Paciente: {proximoTurno ? proximoTurno.first_name + " " + proximoTurno.lastName : "Esperando datos.."}</li>
-                        <li>Razón: {proximoTurno ? proximoTurno.description : "Esperando datos.."}</li>
+                        <li>Fecha: {proximoTurno ? proximoTurno.hour.split("T")[0] : "sin turno pendiente"}</li>
+                        <li>Hora: {proximoTurno ? proximoTurno.hour.split("T")[1].slice(0,-1) : "sin turno pendiente"}</li>
+                        <li>Paciente: {proximoTurno ? proximoTurno.first_name + " " + proximoTurno.lastName : "sin turno pendiente"}</li>
+                        <li>Razón: {proximoTurno ? proximoTurno.description : "sin turno pendiente"}</li>
                     </ul>
                 </div>
             </div>
