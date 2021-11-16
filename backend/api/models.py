@@ -29,6 +29,7 @@ class Turno(models.Model):
         related_name="turnos"
     )
 
+
 class Pago(models.Model):
     monto = models.IntegerField(null=True, default=False)
     payment_code = models.IntegerField(null=True)
@@ -39,6 +40,3 @@ class Pago(models.Model):
         on_delete=models.CASCADE,
         related_name="pagos"
     )
-
-
-
