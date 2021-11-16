@@ -3,6 +3,8 @@ import "./Login.css"
 import { httpPost } from "../utils/httpFunctions";
 import { useAlert } from "react-alert";
 import {useHistory} from "react-router-dom"
+import {Link} from "react-router-dom";
+
 function Login() {
     const history = useHistory()
     const alert = useAlert()
@@ -28,8 +30,8 @@ function Login() {
                 <form className="center-login" onSubmit={(e) => login(e)}>
                     <h1>Ingrese sus datos</h1>
                     <div className="input-grupo">
-                        <label for="userName">UserName</label>
-                        <input id="userName" placeholder="UserName" value={username}
+                        <label for="userName">Nombre de usuario</label>
+                        <input id="userName" placeholder="Nombre de usuario" value={username}
                             onChange={(e) => setUsername(e.target.value)}  />
                     </div>
                     <div className="input-grupo">
@@ -37,11 +39,13 @@ function Login() {
                         <input type="password" id="password" placeholder="Contraseña" value={password}
                             onChange={(e) => setPassword(e.target.value)} />
                     </div>
-                    <button type= "submit" class="botons" >Loguearse</button>
+                    <button type= "submit" className="login-botons" >Loguearse</button>
                 </form>
             <div className="register">
-                <p>Si aun no se ha registrado</p>
-                <a href="Singin"> Registrese aqui</a></div>
+                <p>Si aun no se ha registrado 
+                <Link  to="/Singin"> Registrese aqui</Link>
+                </p>
+                </div>
             </div>
         </div>
     )

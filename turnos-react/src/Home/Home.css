@@ -2,6 +2,7 @@
     font-weight: 700;
     color: white !important;
     margin-left: 20px;
+    font-size: 14.8px;
 }
 #home-img {
     display: flex;
@@ -23,11 +24,12 @@
     letter-spacing: 1px;
     padding: 12px 35px;
     font-weight: 500;
+    width: fit-content;
 }
 
 #home-titulo {
     font-weight: 700;
-    font-size: 4.5rem;
+    font-size: 5.5rem;
     line-height: 1.05em;
     text-align: center;
     margin: 0 auto 1.5rem auto;
@@ -108,36 +110,6 @@ a {
     #foto-mobile {
         width: 60%;
     }
-    .carousel-item img {
-        width: 160px;
-        height: 160px;
-        margin: auto;
-    }
+    
 }
 
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    height: 100px;
-    width: 100px;
-    outline: black;
-    background-size: 100%, 100%;
-    border-radius: 50%;
-
-    background-image: none;
-}
-
-.carousel-control-next-icon:after {
-    content: ">";
-    font-size: 55px;
-    color: black;
-}
-
-.carousel-control-prev-icon:after {
-    content: "<";
-    font-size: 55px;
-    color: black;
-}
-
-.bg-color-black {
-    background-color: black !important;
-}

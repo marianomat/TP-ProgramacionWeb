@@ -1,5 +1,5 @@
 
-
+import {Link} from "react-router-dom";
 import "./Home.css"
 import header from "./header.jpg"
 
@@ -16,10 +16,10 @@ function Home(){
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div className="navbar-nav ms-auto">
-                            <a className="nav-link " aria-current="page" href="#proyecto">Características</a>
-                            <a className="nav-link" href="#tecnologias">Guía</a>
-                            <a className="nav-link  btn btn-sm btn-primary p-2" id="home-ingresar"
-                               href="/jugar.html" tabIndex="-1" aria-disabled="true">INGRESAR</a>
+                            <a className="nav-link " aria-current="page" href="#home-caracteristicas">Características</a>
+                            <a className="nav-link" href="#home-historia">Guía</a>
+                            <Link className="nav-link  btn btn-sm btn-primary p-2" id="home-ingresar"
+                               to="/login" tabIndex="-1" aria-disabled="true">Ingresar</Link>
                         </div>
                     </div>
                 </div>
@@ -30,10 +30,10 @@ function Home(){
                         <div id="home-img" className="col">
                             <h1 id="home-titulo">MIS TURNOS</h1>
                             <p id="gif-p">Administrá tus turnos facilmente</p>
-                            <a href="/jugar.html">
-                                <button id="home-img-btn" type="button" className="btn btn-lg btn-primary">EMPEZAR
+                            <Link to="/Singin">
+                                <button id="home-img-btn" type="button" className="btn btn-lg btn-primary">REGISTRARME
                                 </button>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>

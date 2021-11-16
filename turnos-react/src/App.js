@@ -8,8 +8,8 @@ import {
 } from "react-router-dom";
 import Perfil from "./perfil/Perfil";
 import Home from './Home/Home';
-import Inicio from './P-inicio/Login';
-import Login from './P-inicio/Login';
+import Inicio from './Login/Login';
+import Login from './Login/Login';
 import Singin from './sing-in/Sing-in';
 import Ssignin from './S-signin/S-signin';
 import RegistroPacientes from './RegistroPacientes/RegistroPacientes';
