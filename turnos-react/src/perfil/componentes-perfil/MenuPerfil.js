@@ -12,7 +12,7 @@ function MenuPerfil(props){
     //Recibe la funcion en las props para cerrar el menu, que es manejado por el estado del elemento padre
     return(
         <div id="menu-perfil" className={"menu-container " + props.visibilidadMenu}>
-            <div className="menu" hidden>
+            <div className="menu">
                 <h3 className="menu-titulo">Menu</h3>
                 <Link to="/perfil/" className="menu-button" onClick={props.handleCerrarMenu}>
                     <i className="fas fa-chart-line"></i> <h5>Dashboard</h5>
