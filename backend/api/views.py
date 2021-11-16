@@ -55,8 +55,10 @@ class PagoViewSet(viewsets.ModelViewSet):
 def me(request):
     return Response(MeSerializer(request.user).data, 200)
 
-@api_view(["PATCH"])
-def reservar_turno(request):
-    turnos = Turno.objects.all()
+
+@api_view(["GET"])
+def turnos_disponibles(request):
+    query_doctor_id = request.GET.get("doctor_id")
+    turnos = Turno.objects.filter(is_taken=False, doctor_id=query_doctor_id)
     serializer = TurnoSerializer(turnos, many=True)
     return Response(serializer.data, 200)

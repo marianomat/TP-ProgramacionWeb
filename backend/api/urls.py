@@ -6,6 +6,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from api.views import RegisterView
 from api.views import PagoViewSet
 
+from api.views import turnos_disponibles
+
 router = routers.DefaultRouter()
 router.register("turnos", TurnoViewSet)
 router.register("pagos", PagoViewSet)
@@ -15,5 +17,6 @@ urlpatterns = [
     path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('register/', RegisterView.as_view()),
+    path("turnosdisponibles/", turnos_disponibles),
     path('me/', me)
 ]
