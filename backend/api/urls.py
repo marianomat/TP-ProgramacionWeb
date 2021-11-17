@@ -8,6 +8,10 @@ from api.views import PagoViewSet
 
 from api.views import turnos_disponibles
 
+from api.views import update_user
+
+from api.views import delete_user
+
 router = routers.DefaultRouter()
 router.register("turnos", TurnoViewSet)
 router.register("pagos", PagoViewSet)
@@ -18,5 +22,7 @@ urlpatterns = [
     path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('register/', RegisterView.as_view()),
     path("turnosdisponibles/", turnos_disponibles),
-    path('me/', me)
+    path('me/', me),
+    path("updateuser/", update_user),
+    path("deleteuser/", delete_user)
 ]

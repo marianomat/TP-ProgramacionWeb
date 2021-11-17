@@ -1,6 +1,6 @@
 import "./Sing-in.css"
 import {useEffect, useState} from "react";
-import { httpPost } from "../utils/httpFunctions";
+import {httpPost, httpPostRegisterUser} from "../utils/httpFunctions";
 import { useAlert } from "react-alert";
 import {useHistory} from "react-router-dom"
 //<a href="Ssignin" class="botons">Registrarme</a>
@@ -15,7 +15,7 @@ function Singin () {
     const [ password, setPassword] = useState("")
     const registerUser = (e) => {
         e.preventDefault()
-        httpPost ("api/register/", {
+        httpPostRegisterUser ("api/register/", {
             username:username,
             password:password,
             last_name:lastname,

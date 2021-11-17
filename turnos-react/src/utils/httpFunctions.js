@@ -22,6 +22,10 @@ export const httpPost = async (endpoint, data) => {
       } )
 }
 
+export const httpPostRegisterUser = async (endpoint, data) => {
+    return axios.post(baseURL + endpoint, data)
+}
+
 export const httpDelete = async (endpoint) => {
     return axios.delete(baseURL + endpoint,{
         headers: {
