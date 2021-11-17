@@ -35,7 +35,7 @@ class Pago(models.Model):
     payment_code = models.IntegerField(null=True)
     created_at = models.DateTimeField(editable=False, auto_now_add=True, null=True)
     updated_at = models.DateTimeField(editable=False, auto_now_add=True, null=True)
-    doctor = models.ForeignKey(
+    turno = models.ForeignKey(
         Turno,
         on_delete=models.CASCADE,
         related_name="pagos"
