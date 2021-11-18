@@ -49,6 +49,9 @@ function Perfil() {
                     <Route path="/perfil/turnos/:id">
                         <TurnosForm user={user}/>
                     </Route>
+                    <Route path="/perfil/pagos/:id">
+                        <TurnosForm user={user}/>
+                    </Route>
                     <Route path="/perfil/turnos">
                         <Turnos user={user}/>
                     </Route>

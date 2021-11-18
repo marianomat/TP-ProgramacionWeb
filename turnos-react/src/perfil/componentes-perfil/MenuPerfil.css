@@ -46,6 +46,7 @@
 .menu-button:hover {
     background-color: #194D86;
     color: white;
+    cursor: pointer;
 }
 
 .menu-button i {

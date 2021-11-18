@@ -1,9 +1,33 @@
-.nav-link {
+.home-navbar{
+    position: absolute;
+    top: 20px;
+    right: 100px;
+}
+
+.home-nav-link {
     font-weight: 700;
     color: white !important;
     margin-left: 20px;
-    font-size: 14.8px;
+    font-size: 20px;
 }
+
+.home-nav-link-button {
+    font-weight: 700;
+    color: white !important;
+    margin-left: 20px;
+    font-size: 20px;
+}
+.home-main {
+    width: 60%;
+    margin: auto;
+}
+
+.home-texto-container {
+    width: fit-content;
+    margin-bottom: 100px;
+    margin-left: auto;
+}
+
 #home-img {
     display: flex;
     width: 100%;
@@ -21,10 +45,16 @@
 #home-img-btn {
     opacity: 1 !important;
     border-radius: 100px !important;
-    letter-spacing: 1px;
     padding: 12px 35px;
-    font-weight: 500;
+    font-weight: bold;
     width: fit-content;
+    box-shadow: none;
+    border: none;
+    font-family: "Roboto", sans-serif;
+}
+
+#home-img-btn:hover {
+    cursor: pointer;
 }
 
 #home-titulo {

@@ -5,8 +5,8 @@ function Ssignin (){
         <div className ="general">
         <div className="center-Ssignin">
         
-            <h1>El usuario ha sido creado </h1>
-            <a href="Login" className="botons">Inicar secion</a>
+            <h1>El usuario ha sido creado correctamente</h1>
+            <a href="Login" className="botons">Inicar sesión</a>
             </div>
             </div>
     )

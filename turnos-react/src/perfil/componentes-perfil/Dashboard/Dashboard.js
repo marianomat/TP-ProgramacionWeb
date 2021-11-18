@@ -46,7 +46,7 @@ function Dashboard(props) {
         <div className="dashboard-contenido">
             <div className="dashboard-contenido-header">
                 <h3 className="dashboard-contenido-titulo">Bienvenido</h3>
-                <Link className="dashboard-contenido-pagina-a" to={"registropacientes/?doctor_id=" + props.user.id}><p className="dashboard-contenido-pagina">Ver pagina de turnos <i
+                <Link className="dashboard-contenido-pagina-a" to={"/registropacientes/?doctor_id=" + props.user.id}><p className="dashboard-contenido-pagina">Ver pagina de turnos <i
                     className="fas fa-location-arrow"></i></p></Link>
             </div>
             <div className="dashboard-contenido-info">
