@@ -41,7 +41,7 @@ https://github.com/marianomat/TP-ProgramacionWeb.git
 
 _Luego de la clonaciòn es necesario instalar las dependencias que requiere el proyecto_
 _Empezamos instalando las dependencias necesarias para el Front-end_
-_Ingresamos a la carpeta turnos-reack con el comando_
+_Ingresamos a la carpeta turnos-react con el comando_
 
 ```
 cd turnos-react 
@@ -61,7 +61,7 @@ _Iniciamos el entorno de trabajo de Python con el comando e instalamos las depen
 pipenv shell
 pipenv install
 ```
-_Creamos la base de datos
+_Creamos la base de datos_
 ```
 py manage.py makemigrations
 py manage.py migrate
