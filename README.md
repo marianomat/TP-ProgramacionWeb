@@ -36,7 +36,7 @@ _Lo primero que debemos hacer es clonar el repositorio en un directorio de prefe
 Abrimos la consola y ponemos el comando:_
 
 ```
-https://github.com/marianomat/TP-ProgramacionWeb.git
+git clone https://github.com/marianomat/TP-ProgramacionWeb.git
 ```
 
 _Luego de la clonaciòn es necesario instalar las dependencias que requiere el proyecto_
