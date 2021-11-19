@@ -12,7 +12,7 @@ function Login() {
     const [password, setPassword] = useState("")
     const login = (e) => {
         e.preventDefault()
-        httpPost('api/login/', {username: username, password: password})
+        httpPost('api/login/', {username: username, password: password}, false)
             .then((res) => {
             
                 localStorage.setItem('token', res.data.access)

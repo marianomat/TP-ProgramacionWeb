@@ -15,13 +15,13 @@ function Singin () {
     const [ password, setPassword] = useState("")
     const registerUser = (e) => {
         e.preventDefault()
-        httpPostRegisterUser ("api/register/", {
+        httpPost ("api/register/", {
             username:username,
             password:password,
             last_name:lastname,
             email:email,
             first_name:name
-        }).then(res => {
+        }, false).then(res => {
             alert.show('Se ha creado el usuario ',{
                 type: "success"
             })

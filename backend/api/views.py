@@ -14,7 +14,7 @@ from api.models import Pago
 
 
 class TurnoViewSet(viewsets.ModelViewSet):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated] # TENES QUE ESTAR LOGUEADO PARA SEGUIR
     serializer_class = TurnoSerializer
     queryset = Turno.objects.all()
 
@@ -31,6 +31,7 @@ class TurnoViewSet(viewsets.ModelViewSet):
         return Turno.objects.filter(doctor_id=self.request.user.id)
 
     def patch_queryset(self):
+        self.permission_classes = []
         return Turno.objects.filter(doctor_id=self.request.user.id)
 
 # CreateAPIView solo crea la parte de CREATE del AMB
@@ -44,8 +45,8 @@ class PagoViewSet(viewsets.ModelViewSet):
     serializer_class = PagoSerializer
     queryset = Pago.objects.all()
 
-    def perform_create(self, serializer):
-        serializer.save(doctor_id=self.request.user.id)
+    # def perform_create(self, serializer):
+    #     serializer.save(doctor_id=self.request.user.id)
 
 
 # Otra manera de crear rutas.heredar de clases creadas por Django, sino con funciones
@@ -82,4 +83,11 @@ def turnos_disponibles(request):
     query_doctor_id = request.GET.get("doctor_id")
     turnos = Turno.objects.filter(is_taken=False, doctor_id=query_doctor_id)
     serializer = TurnoSerializer(turnos, many=True)
+    return Response(serializer.data, 200)
+
+@api_view(["PATCH"])
+def editar_turno_paciente(request):
+    turno_id = request.GET.get("id")
+    turno = Turno.objects.filter(pk=turno_id)
+    serializer = TurnoSerializer(turno, many=True)
     return Response(serializer.data, 200)

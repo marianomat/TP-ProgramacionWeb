@@ -46,4 +46,5 @@ class MeSerializer(serializers.ModelSerializer):
 class PagoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pago
-        fields = "__all__"
+        exclude = ["created_at", "updated_at"]
+

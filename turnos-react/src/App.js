@@ -31,13 +31,12 @@ function App() {
             <Route path="/Ssignin">
               <Ssignin/>
             </Route>
-            <Route path="/RegistroPacientes">
+            <Route path="/RegistroPacientes/:doctorid">
               <RegistroPacientes/>
             </Route>
             <Route path="/">
               <Home />
             </Route>
-            
           </Switch>
       </Router>
   );

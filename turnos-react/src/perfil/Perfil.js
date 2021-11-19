@@ -16,6 +16,7 @@ import DatosForm from "./componentes-perfil/DatosForm/DatosForm";
 import {useState} from "react";
 import TurnosForm from "./componentes-perfil/TurnosForm/TurnosForm";
 import {httpGet} from "../utils/httpFunctions";
+import PagosForm from "./componentes-perfil/PagosForm/PagosForm";
 
 function Perfil() {
     //Usamos el state para ir cambiando la visiblidad del menu en version mobile
@@ -50,7 +51,7 @@ function Perfil() {
                         <TurnosForm user={user}/>
                     </Route>
                     <Route path="/perfil/pagos/:id">
-                        <TurnosForm user={user}/>
+                        <PagosForm user={user}/>
                     </Route>
                     <Route path="/perfil/turnos">
                         <Turnos user={user}/>

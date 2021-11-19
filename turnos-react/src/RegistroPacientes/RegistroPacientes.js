@@ -1,7 +1,7 @@
 import React from "react";
 import './RegistroPacientes.css'
 import "../perfil/componentes-perfil/Turnos/Turnos.css";
-import {httpGet, httpDelete, httpPut, httpPatch, httpPost} from "../utils/httpFunctions";
+import {httpGet,httpGetSinLogin, httpDelete, httpPut, httpPatch, httpPost} from "../utils/httpFunctions";
 import {useAlert} from "react-alert";
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
@@ -10,13 +10,16 @@ import {Link} from "react-router-dom";
 import Turnos from "../perfil/componentes-perfil/Turnos/Turnos";
 
 function RegistroPacientes(props) {
-  const alert = useAlert()
-  const [registropacientes, setTurnos] = useState([])
-  const [turno, setTurno] = useState({})
-  const [pago, setPago] = useState({})
-  const [cantidadTurnos, setCantidadTurnos] = useState(0)
-  const [id, setid] = useState()
-  const [turnoseleccionado, setTurnoSeleccionado] = useState ({}) 
+
+      const {doctorid} = useParams()
+
+      const alert = useAlert()
+      const [registropacientes, setTurnos] = useState([])
+      const [turno, setTurno] = useState({})
+      const [pago, setPago] = useState({})
+      const [cantidadTurnos, setCantidadTurnos] = useState(0)
+      const [id, setid] = useState()
+      const [turnoseleccionado, setTurnoSeleccionado] = useState ({})
 
 function activaropciones()
 {
@@ -62,7 +65,7 @@ function activaropciones()
 } */
   const fetchTurnos = () => {
     ///No olvidar la barra al final de turnos
-    httpGet("api/turnos/")
+      httpGet("api/turnosdisponibles/?doctor_id="+doctorid, false)
         .then((data) => {
             for(let day of data) {
                 day.horario = new Date(day.hour).toLocaleDateString() + " "
@@ -81,7 +84,7 @@ function activaropciones()
   const editTurno = (e) => {
     e.preventDefault()
     console.log(turno)
-    httpPatch("api/turnos/" + id + "/", turno).then((res) => {
+    httpPatch("api/reservarturno/?id="+ id, turno, false).then((res) => {
         alert.show('Turno modificado correctamente',{
             type: "success"
         })
@@ -90,31 +93,29 @@ function activaropciones()
     }))
     let pagopost = pago
     pagopost.turno = id
-    console.log(pagopost)
-    let pagotest = {
-      monto: 500, 
-      payment_code: 200,
-      turno: 4
-    }
-    httpPost("api/pagos/", pagotest).then((res) => {
-      alert.show('Pago modificado correctamente',{
-          type: "success"
-      })
-      }).catch((err) => alert.show("Error",{
-        type: "error"
-    }))
-}
-  const handleDelete = (id) => {
-    httpDelete("api/turnos/" + id)
-        .then((res) => alert.show('Eliminado correctamente!',{
-            type: "success"
-        }))
-        .catch(err => alert.show('No se pudo eliminar, intente mas tarde!',{
-            type: "error"
-        }))
+
+      if(turno.is_payed) {
+          httpPost("api/pagos/", pagopost, false).then((res) => {
+              alert.show('Pago modificado correctamente',{
+                  type: "success"
+              })
+          }).catch((err) => alert.show("Error",{
+              type: "error"
+          }))
+      }
+
 }
 
   useEffect(fetchTurnos,[]);
+  const mostrarPago = (e) => {
+      let test = e.target.value
+      if(test == "true") {
+          setTurno({...turno, is_payed: true})
+      } else {
+          setTurno({...turno, is_payed: false})
+      }
+
+  }
     return (
         <div className="registropaciente-contenedor">
             <title>Página Turnos</title>
@@ -130,32 +131,33 @@ function activaropciones()
               <form className="registropaciente-tit" onSubmit ={(e) => editTurno(e)} name="formu">
                 <div className="registropaciente-input-grupo">
                   <label for="nombre">Nombre:</label>
-                  <input id="nombre" value={turno.patient_name ? turno.patient_name : ""} placeholder="Nombre"
+                  <input required id="nombre" value={turno.patient_name ? turno.patient_name : ""} placeholder="Nombre"
                            onChange={(e) => setTurno({...turno, patient_name:e.target.value})}/>
                 </div>
                 <div className="registropaciente-input-grupo">
                   <label for="apellido">Apellido:</label>
-                  <input id="apellido" value={turno.patient_lastName ? turno.patient_lastName : ""} placeholder="Apellido"
+                  <input required id="apellido" value={turno.patient_lastName ? turno.patient_lastName : ""} placeholder="Apellido"
                            onChange={(e) => setTurno({...turno, patient_lastName:e.target.value})}/>
                 </div>
                 <div className="registropaciente-input-grupo">
                   <label for="numero">Número celular:</label>
-                  <input id="numero" value={turno.patient_phone ? turno.patient_phone : ""} placeholder="Numero"
+                  <input required  id="numero" value={turno.patient_phone ? turno.patient_phone : ""} placeholder="Numero"
                            onChange={(e) => setTurno({...turno, patient_phone:e.target.value})}/>
                 </div>
                 <div className="registropaciente-input-grupo">
                   <label for="email">Correo electrónico:</label>
-                  <input id="email" value={turno.patient_email ? turno.patient_email : ""} placeholder="Mail"
+                  <input required id="email" value={turno.patient_email ? turno.patient_email : ""} placeholder="Mail"
                            onChange={(e) => setTurno({...turno, patient_email:e.target.value})}/>
                 </div>
 
                 <div className="registropaciente-input-grupo">
                   <label for="pagoturno">¿Pagar ahora?</label>
-                    <select name="Pago" id='pagoturno' className="botons" value = {turno.is_payed}
-                      onChange={(e) => setTurno({...turno, is_payed:e.target.value})}> 
+                    <select required name="Pago" id='pagoturno' className="botons" value={turno.is_payed}
+                      onChange={(e) => mostrarPago(e)}>
                       {/* /* onChange={optionpago}> */}
-                        <option value= {true} onClick={activaropciones}>SI</option>
-                        <option value= {false} onClick={activaropciones}>NO</option>
+                        <option>SELECCIONAR</option>
+                        <option value={true}>SI</option>
+                        <option value={false}>NO</option>
                     </select>    
                </div>
 
@@ -164,13 +166,13 @@ function activaropciones()
                <div>
                 <div className="registropaciente-input-grupo">
                   <label for="pagos">Monto:</label>
-                  <input id="pagos" value={pago.monto ? pago.monto : ""} placeholder="$" disabled = {false} /* {document.getElementById("pagoturno").value} */
+                  <input disabled={turno.is_payed ? null : true} id="pagos" value={pago.monto ? pago.monto : ""} placeholder="$"  /* {document.getElementById("pagoturno").value} */
                     onChange={(e) => setPago({...pago, monto:e.target.value})}/>
                 </div>
                   
                 <div className="registropaciente-input-grupo">
                   <label for="pagos">Codigo Pago</label>
-                  <input name= "pagos" id="pagos" value={pago.payment_code ? pago.payment_code: ""} placeholder="- - - -" disabled = {false} /* {document.getElementById("pagoturno").value} */
+                  <input required disabled={turno.is_payed ? null : true} name= "pagos" id="pagos" value={pago.payment_code ? pago.payment_code: ""} placeholder="- - - -"  /* {document.getElementById("pagoturno").value} */
                     onChange={(e) => setPago({...pago, payment_code:e.target.value})}/>
                 </div>
                 {pago.turno = id}
@@ -178,8 +180,9 @@ function activaropciones()
                
                <div className="registropaciente-input-grupo">
                   <label for="fechaturno">Fecha de turnos disponibles</label>
-                  <select name="Fecha" id='fechaturno' className="botons" value = {turno.hour}
+                  <select required  name="Fecha" id='fechaturno' className="botons" value = {turno.hour}
                     onChange={(e) => setid(e.target.value)}>
+                      <option value="">SELECCIONAR</option>
                       {registropacientes.map(turno => {
                         if (turno.is_taken == false){
                         return(
