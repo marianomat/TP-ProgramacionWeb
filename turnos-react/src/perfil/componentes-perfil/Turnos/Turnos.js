@@ -61,7 +61,6 @@ function Turnos() {
                         <th>Código</th>
                         <th>Horario</th>
                         <th>Paciente</th>
-                        <th>Telefono</th>
                         <th>Descripción</th>
                         <th>Pagado</th>
                         <th>Modificar</th>
@@ -75,7 +74,6 @@ function Turnos() {
                                 <td className="turnos-td-horario">{turno.id}</td>
                                 <td className="turnos-td-horario">{turno.horario}</td>
                                 <td>{turno.patient_name + " " + turno.patient_lastName}</td>
-                                <td>{turno.patient_email}</td>
                                 <td>{turno.description}</td>
                                 <td>{turno.is_payed ? "SI" : "NO"}</td>
                                 <td className="turnos-td-edit">

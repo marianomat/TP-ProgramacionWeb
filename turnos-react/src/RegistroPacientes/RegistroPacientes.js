@@ -21,48 +21,6 @@ function RegistroPacientes(props) {
       const [id, setid] = useState()
       const [turnoseleccionado, setTurnoSeleccionado] = useState ({})
 
-function activaropciones()
-{
-  if (document.formu.Pago.value == true) {
-    document.formu.pagos.disabled = false;
-     }else{
-    if (document.formu.Pago.value == false) {
-             document.formu.pagos.disabled = true;
-    }
-    }
-} 
-
-/* function desactivaropciones()
-{
-  return(
-  document.getElementById("pagos").disabled="true"
-  )} */
-
-/* function optionpago() {
-  let turnoselec = ""
-    for (let i in turno){
-      if (i.id == id){
-        turnoselec = i
-      }
-    }
-    if (turnoselec != "" && turnoselec.is_payed == false)
-    { return (
-      <div>
-        <div className="registropaciente-input-grupo">
-          <label for="monto">Monto:</label>
-          <input id="monto" value={pago.monto ? pago.monto : ""} placeholder="$"
-                  onChange={(e) => setPago({...pago, monto:e.target.value})}/>
-          </div>
-
-          <div className="registropaciente-input-grupo">
-          <label for="codigopago">Codigo Pago</label>
-          <input id="codigopago" value={pago.payment_code ? pago.payment_code: ""} placeholder="- - - -"
-                  onChange={(e) => setPago({...pago, payment_code:e.target.value})}/>
-          </div>
-          {pago.turno = id}
-      </div>
-    )} 
-} */
   const fetchTurnos = () => {
     ///No olvidar la barra al final de turnos
       httpGet("api/turnosdisponibles/?doctor_id="+doctorid, false)
@@ -175,7 +133,6 @@ function activaropciones()
                   <input required disabled={turno.is_payed ? null : true} name= "pagos" id="pagos" value={pago.payment_code ? pago.payment_code: ""} placeholder="- - - -"  /* {document.getElementById("pagoturno").value} */
                     onChange={(e) => setPago({...pago, payment_code:e.target.value})}/>
                 </div>
-                {pago.turno = id}
               </div>
                
                <div className="registropaciente-input-grupo">

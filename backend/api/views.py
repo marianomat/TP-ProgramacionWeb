@@ -69,6 +69,16 @@ def update_user(request):
         user_serializer.save()
     return Response(user_serializer.data, 200)
 
+@api_view(["PATCH"])
+def editar_turno_paciente(request):
+    turno_id = request.GET.get("id")
+    turno = Turno.objects.filter(pk=turno_id).first()
+    data = request.data
+    serializer = TurnoSerializer(turno, data, partial=True)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data, 200)
+
 @api_view(["DELETE"])
 @permission_classes([IsAuthenticated])
 def delete_user(request):
@@ -85,9 +95,4 @@ def turnos_disponibles(request):
     serializer = TurnoSerializer(turnos, many=True)
     return Response(serializer.data, 200)
 
-@api_view(["PATCH"])
-def editar_turno_paciente(request):
-    turno_id = request.GET.get("id")
-    turno = Turno.objects.filter(pk=turno_id)
-    serializer = TurnoSerializer(turno, many=True)
-    return Response(serializer.data, 200)
+
