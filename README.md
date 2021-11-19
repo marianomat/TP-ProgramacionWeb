@@ -81,7 +81,8 @@ _Menciona las herramientas que utilizaste para crear tu proyecto_
 
 * [React](https://es.reactjs.org/) - El framework para front-end
 * [Django](https://www.djangoproject.com/) - Framework para el back-end
-* TERMINAR
+* [react-day-picker](https://react-day-picker.js.org/) - Libreria que nos facilitó el manejo de selección de fechas
+* [react-alert](https://www.npmjs.com/package/react-alert) - Libreria para dar de manera simple feedback al usuario.
 
 
 ## Autores ✒️
@@ -91,9 +92,6 @@ _Menciona las herramientas que utilizaste para crear tu proyecto_
 * **Mariano Pereyra** - *Desarrollador* - [Github](https://github.com/marianomat)
 
 
-## Expresiones de Gratitud 🎁
-
-* GRACIAS DIOS DE DJANGO POR FUNCIOANR Y DEJARME MODIFICAR LOS USUARIOS *
 
 
 
