@@ -61,6 +61,11 @@ _Iniciamos el entorno de trabajo de Python con el comando e instalamos las depen
 pipenv shell
 pipenv install
 ```
+_Creamos la base de datos
+```
+py manage.py makemigrations
+py manage.py migrate
+```
 Listo! Ahoa podemos poner en funcionamiento la aplicaciòn
 
 ## Despliegue 📦
