@@ -51,6 +51,7 @@ function PagosForm(props) {
                     <input id="description" value={turno.description ? turno.description : "SIN PACIENTE"}
                            onChange={(e) => setPago({...pago, description:e.target.value})}/>
                 </div>
+
                 <button type="submit">Modificar</button>
             </form>
         </div>

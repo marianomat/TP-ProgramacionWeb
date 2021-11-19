@@ -42,6 +42,7 @@ class MeSerializer(serializers.ModelSerializer):
         # NO UTILIZAMOS FIELDS PORUQE USAMOS EXCLUDE; SE USA UNO U EL OTRO
         exclude = ["password", "is_active", "date_joined", "groups", "is_staff", "is_superuser", "last_login", "user_permissions"]
 
+
 class PagoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pago

@@ -33,7 +33,6 @@ class TurnoViewSet(viewsets.ModelViewSet):
     def patch_queryset(self):
         return Turno.objects.filter(doctor_id=self.request.user.id)
 
-
 # CreateAPIView solo crea la parte de CREATE del AMB
 # Solo necesitamos una sola ruta POST para crear un usuario
 # El queryset no hace falta ya que solo es necesario para rutas que hay que indicar un conjunto de datos con los que trabaje
