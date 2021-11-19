@@ -13,7 +13,10 @@ function Dashboard(props) {
         httpGet("api/turnos/").then((res) => {
             for(let turno of res) {
                 if(turno.is_taken) {
+
                     setProximoTurno(turno)
+                    console.log("*************")
+                    console.log(turno)
                     break
                 }
             }
@@ -64,8 +67,8 @@ function Dashboard(props) {
                     <ul>
                         <li>Fecha: {proximoTurno ? proximoTurno.hour.split("T")[0] : "sin turno pendiente"}</li>
                         <li>Hora: {proximoTurno ? proximoTurno.hour.split("T")[1].slice(0,-1) : "sin turno pendiente"}</li>
-                        <li>Paciente: {proximoTurno ? proximoTurno.first_name + " " + proximoTurno.lastName : "sin turno pendiente"}</li>
-                        <li>Razón: {proximoTurno ? proximoTurno.description : "sin turno pendiente"}</li>
+                        <li>Paciente: {proximoTurno ? proximoTurno.patient_name + " " + proximoTurno.patient_lastName : "sin turno pendiente"}</li>
+                        <li>Tel paciente: {proximoTurno ? proximoTurno.patient_phone : "sin turno pendiente"}</li>
                     </ul>
                 </div>
             </div>
