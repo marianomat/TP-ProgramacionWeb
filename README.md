@@ -82,7 +82,7 @@ py manage.py runserver
 
 ## Construido con 🛠️
 
-_Menciona las herramientas que utilizaste para crear tu proyecto_
+
 
 * [React](https://es.reactjs.org/) - El framework para front-end
 * [Django](https://www.djangoproject.com/) - Framework para el back-end
