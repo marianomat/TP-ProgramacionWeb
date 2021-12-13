@@ -7,7 +7,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# C extensions
+# ConfirmacionTurnos extensions
 *.so
 
 # Distribution / packaging

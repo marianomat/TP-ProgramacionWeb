@@ -15,6 +15,10 @@ from api.views import delete_user
 
 from api.views import editar_turno_paciente
 
+from api.views import generar_preferencia
+
+from api.views import getturno
+
 router = routers.DefaultRouter()
 router.register("turnos", TurnoViewSet)
 router.register("pagos", PagoViewSet)
@@ -29,4 +33,6 @@ urlpatterns = [
     path("updateuser/", update_user),
     path("deleteuser/", delete_user),
     path("reservarturno/", editar_turno_paciente),
+    path("generarlpreferencia/", generar_preferencia),
+    path('getturno/', getturno)
 ]

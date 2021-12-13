@@ -12,6 +12,9 @@ from api.serializers import PagoSerializer
 from api.models import Turno
 from api.models import Pago
 
+# SDK de Mercado Pago
+import mercadopago
+
 
 class TurnoViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated] # TENES QUE ESTAR LOGUEADO PARA SEGUIR
@@ -94,5 +97,31 @@ def turnos_disponibles(request):
     turnos = Turno.objects.filter(is_taken=False, doctor_id=query_doctor_id)
     serializer = TurnoSerializer(turnos, many=True)
     return Response(serializer.data, 200)
+
+@api_view(["GET"])
+def getturno(request):
+    query_turno_id = request.GET.get("turno_id")
+    turno = Turno.objects.filter(id=query_turno_id).first()
+    serializer = TurnoSerializer(turno)
+    return Response(serializer.data, 200)
+
+@api_view(["GET"])
+def generar_preferencia(request):
+    # Agrega credenciales
+    sdk = mercadopago.SDK("TEST-1607425818186031-040702-f6e10bb148b0e60aea12498d3745e637-20472128")
+    # Crea un ítem en la preferencia
+    preference_data = {
+        "items": [
+            {
+                "title": "Mi producto",
+                "quantity": 1,
+                "unit_price": 75.76,
+            }
+        ]
+    }
+
+    preference_response = sdk.preference().create(preference_data)
+    preference = preference_response["response"]
+    return Response(preference, 200)
 
 

@@ -14,6 +14,7 @@ import Singin from './sing-in/Sing-in';
 import Ssignin from './S-signin/S-signin';
 import RegistroPacientes from './RegistroPacientes/RegistroPacientes';
 import AuthRoute from "./AuthRoute";
+import ConfirmacionTurno from "./ConfirmacionTurnos/ConfirmacionTurno"
 
 function App() {
   return (
@@ -30,6 +31,9 @@ function App() {
             </Route>
             <Route path="/Ssignin">
               <Ssignin/>
+            </Route>
+            <Route path="/confirmacionTurno/:turnoid">
+              <ConfirmacionTurno/>
             </Route>
             <Route path="/RegistroPacientes/:doctorid">
               <RegistroPacientes/>
