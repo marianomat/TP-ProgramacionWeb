@@ -15,6 +15,7 @@ class Turno(models.Model):
     is_taken = models.BooleanField(blank=True, null=True, default=False)
     hour = models.DateTimeField(blank=False, null=False)
     description = models.TextField(blank=True, null=True, default="--", max_length=100)
+    price = models.TextField(blank=True, null=True, default="0")
     is_payed = models.BooleanField(blank=True, null=True, default=False)
     doctor = models.TextField(blank=True, default="test")
     patient_name = models.TextField(blank=True, null=True, default="TURNO", max_length=30)

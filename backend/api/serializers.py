@@ -7,11 +7,22 @@ from api.models import Turno
 # Traduce el objeto a json
 from api.models import Pago
 
+class MeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        # NO UTILIZAMOS FIELDS PORUQE USAMOS EXCLUDE; SE USA UNO U EL OTRO
+        exclude = ["password", "is_active", "date_joined", "groups", "is_staff", "is_superuser", "last_login", "user_permissions"]
+
+
 
 class TurnoSerializer(serializers.ModelSerializer):
+    #Para que use el meserealizer cuando uso el depth
+    doctor = MeSerializer()
     class Meta:
         model = Turno
         fields = "__all__"  # Se indican lo fields que quiero incluir en el serializer
+        #EL DEPTH SIRVE PARA PODER LLENAR DE DATOS LAS LLAVES FORANEAS
+        depth = 1
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -35,12 +46,6 @@ class RegisterSerializer(serializers.ModelSerializer):
         )
         return user
 
-
-class MeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = get_user_model()
-        # NO UTILIZAMOS FIELDS PORUQE USAMOS EXCLUDE; SE USA UNO U EL OTRO
-        exclude = ["password", "is_active", "date_joined", "groups", "is_staff", "is_superuser", "last_login", "user_permissions"]
 
 
 class PagoSerializer(serializers.ModelSerializer):

@@ -87,25 +87,25 @@ function RegistroPacientes(props) {
                 </h2>
                 <form className="registropaciente-tit" onSubmit={(e) => editTurno(e)} name="formu">
                     <div className="registropaciente-input-grupo">
-                        <label for="nombre">Nombre:</label>
+                        <label htmlFor="nombre">Nombre:</label>
                         <input required id="nombre" value={turno.patient_name ? turno.patient_name : ""}
                                placeholder="Nombre"
                                onChange={(e) => setTurno({...turno, patient_name: e.target.value})}/>
                     </div>
                     <div className="registropaciente-input-grupo">
-                        <label for="apellido">Apellido:</label>
+                        <label htmlFor="apellido">Apellido:</label>
                         <input required id="apellido" value={turno.patient_lastName ? turno.patient_lastName : ""}
                                placeholder="Apellido"
                                onChange={(e) => setTurno({...turno, patient_lastName: e.target.value})}/>
                     </div>
                     <div className="registropaciente-input-grupo">
-                        <label for="numero">Número celular:</label>
+                        <label htmlFor="numero">Número celular:</label>
                         <input required id="numero" value={turno.patient_phone ? turno.patient_phone : ""}
                                placeholder="Numero"
                                onChange={(e) => setTurno({...turno, patient_phone: e.target.value})}/>
                     </div>
                     <div className="registropaciente-input-grupo">
-                        <label for="email">Correo electrónico:</label>
+                        <label htmlFor="email">Correo electrónico:</label>
                         <input required id="email" value={turno.patient_email ? turno.patient_email : ""}
                                placeholder="Mail"
                                onChange={(e) => setTurno({...turno, patient_email: e.target.value})}/>
@@ -142,14 +142,14 @@ function RegistroPacientes(props) {
                     {/*</div>*/}
 
                     <div className="registropaciente-input-grupo">
-                        <label for="fechaturno">Fecha de turnos disponibles</label>
+                        <label htmlFor="fechaturno">Fecha de turnos disponibles</label>
                         <select required name="Fecha" id='fechaturno' className="botons" value={turno.hour}
                                 onChange={(e) => setid(e.target.value)}>
                             <option value="">SELECCIONAR</option>
                             {registropacientes.map(turno => {
                                 if (turno.is_taken == false) {
                                     return (
-                                        <option value={turno.id}> {turno.horario} </option>
+                                        <option key={turno.id} value={turno.id}> {turno.horario} </option>
                                     )
                                 }
                             })}

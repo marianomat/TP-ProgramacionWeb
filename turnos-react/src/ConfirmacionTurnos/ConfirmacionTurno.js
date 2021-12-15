@@ -12,14 +12,15 @@ import {useAlert} from "react-alert";
 function ConfirmacionPago() {
     const alert = useAlert()
     const [preferenceId, setPreferenceId] = useState(null);
-    const [data, setData] = useState();
+    const [turno, setTurno] = useState();
     const {turnoid} = useParams()
 
     const fetchTurnos = () => {
         ///No olvidar la barra al final de turnos
         httpGet("api/getturno/?turno_id=" + turnoid, false)
             .then((data) => {
-                //TODO
+                console.log(data)
+                setTurno(data);
             }).catch((err) => {
                 alert.show('Error obtenido los turnos, intente mas tarde!', {
                     type: "error"
@@ -47,12 +48,22 @@ function ConfirmacionPago() {
             const form = document.querySelector(".botonpago");
             form.appendChild(script);
         }
-    }, []);
+    }, [preferenceId]);
 
     return (
         <div>
             <h1>Turno confirmado correctamente</h1>
-            <form className="botonpago" method="GET"></form>
+            <h2>Datos del turno:</h2>
+            <ul>
+                <li>Doctor: {turno?turno.doctor.last_name + " " + turno.doctor.first_name :"Cargando"}</li>
+                <li>Horario: {turno?turno.hour:"Cargando"}</li>
+                <li>Nombre paciente: {turno?turno.patient_name:"Cargando"}</li>
+                <li>Apellido paciente: {turno?turno.patientlastName:"Cargando"}</li>
+                <li>Telefono paciente: {turno?turno.patient_phone:"Cargando"}</li>
+            </ul>
+            <h2>Puede abonar el turno haciendo click en pagar!</h2>
+                <h4>Costo: {turno?turno.price:"Cargando"}</h4>
+                <form className="botonpago" method="GET"></form>
         </div>
     )
 }

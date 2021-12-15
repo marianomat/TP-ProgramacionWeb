@@ -34,8 +34,15 @@ class TurnoViewSet(viewsets.ModelViewSet):
         return Turno.objects.filter(doctor_id=self.request.user.id)
 
     def patch_queryset(self):
-        self.permission_classes = []
         return Turno.objects.filter(doctor_id=self.request.user.id)
+
+    # def get_permissions(self):
+    #     if self.action == "list":
+    #         self.permission_classes = [IsAuthenticated]
+    #     else:
+    #         self.permission_classes = []
+    #     return super(TurnoViewSet)
+
 
 # CreateAPIView solo crea la parte de CREATE del AMB
 # Solo necesitamos una sola ruta POST para crear un usuario

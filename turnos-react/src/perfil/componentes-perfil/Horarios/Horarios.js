@@ -18,6 +18,7 @@ function Horarios(props) {
     const [turnosDayCount, setTurnosDayCount] = useState(1)
     const [turnosStartHour, setTurnosStartHour] = useState("08:30")
     const [turnosDuration, setTurnosDuration] = useState(30)
+    const [price, setPrice] = useState("")
     // Funcion que maneja los dias seleccionados en el estado
     // El primer parametro recibe un dia seleccionado, el segundo parametro es para eliminar la seleccion si se vuelve a presionar sobre el mismo dia
     const handleDayClick = (day, { selected, disabled }) => {
@@ -55,7 +56,8 @@ function Horarios(props) {
                 for(let i = 0; i < turnosDayCount; i++ ) {
                     await httpPost("api/turnos/", {
                         doctor: user.id,
-                        hour: new Date(startHourISO).toISOString()
+                        hour: new Date(startHourISO).toISOString(),
+                        price: price
                     })
                     startHourISO = startHourISO + (60000 * turnosDuration)
                     alert.show('Turno/s creado correctamente',{
@@ -137,6 +139,10 @@ function Horarios(props) {
                                 <option value="30">30</option>
                                 <option value="60">60</option>
                             </select>
+                        </div>
+                        <div className="contenedor-duracion">
+                            <label htmlFor="horarios-precio">Ingrese el precio de los turnos</label>
+                            <input type="text" id="horarios-precio" value={price} onChange={(e) => setPrice(e.target.value)}/>
                         </div>
                         <button type="submit">Habilitar</button>
                     </form>
