@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {httpGet, httpPost} from "../utils/httpFunctions";
+import {httpGet, httpPatch, httpPost} from "../utils/httpFunctions";
 import "./ConfirmarPago.css"
 import {useParams} from "react-router-dom";
 import {useAlert} from "react-alert";
@@ -14,6 +14,33 @@ function ConfirmacionPago() {
     const [preferenceId, setPreferenceId] = useState(null);
     const [turno, setTurno] = useState();
     const {turnoid} = useParams()
+    const [pago, setPago] = useState()
+
+    const pagarTurno = () => {
+        let pagopost = {
+            monto: turno.price,
+            payment_code: 123123,
+            turno: turno.id
+        }
+        console.log(pagopost)
+        httpPost("api/pagos/", pagopost, false).then((res) => {
+            alert.show('Pago modificado correctamente', {
+                type: "success"
+            })
+        }).catch((err) => alert.show("Error 1", {
+            type: "error"
+        }))
+
+        httpPatch("api/reservarturno/?id=" + turno.id, {...turno, is_payed: true}, false).then((res) => {
+            alert.show('Turno modificado correctamente', {
+                type: "success"
+            })
+        }).catch((err) => alert.show("Error 2", {
+            type: "error"
+        }))
+    }
+
+
 
     const fetchTurnos = () => {
         ///No olvidar la barra al final de turnos
@@ -30,13 +57,20 @@ function ConfirmacionPago() {
     }
     useEffect(fetchTurnos, []);
 
+
     useEffect(() => {
-        // luego de montarse el componente, le pedimos al backend el preferenceId
-        httpGet("api/generarlpreferencia/", false).then((order) => {
-            console.log(order)
-            setPreferenceId(order.id);
-        });
-    }, []);
+        if(turno) {
+            let preferencia = {
+                titulo: "Turno",
+                precio: turno.price
+            }
+            // luego de montarse el componente, le pedimos al backend el preferenceId
+            httpPatch("api/generarlpreferencia/", preferencia, false).then((order) => {
+                console.log(order)
+                setPreferenceId(order.id);
+            });
+        }
+    }, [turno]);
 
     useEffect(() => {
         if (preferenceId) {
@@ -63,7 +97,7 @@ function ConfirmacionPago() {
             </ul>
             <h2>Puede abonar el turno haciendo click en pagar!</h2>
                 <h4>Costo: {turno?turno.price:"Cargando"}</h4>
-                <form className="botonpago" method="GET"></form>
+                <form onClick={pagarTurno} className="botonpago" method="GET"></form>
         </div>
     )
 }

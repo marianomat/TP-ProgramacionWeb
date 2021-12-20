@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from api.serializers import TurnoSerializer, MeSerializer
+from api.serializers import TurnoSerializer, MeSerializer, TurnoSerializer1
 from api.serializers import RegisterSerializer
 from api.serializers import PagoSerializer
 
@@ -18,7 +18,7 @@ import mercadopago
 
 class TurnoViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated] # TENES QUE ESTAR LOGUEADO PARA SEGUIR
-    serializer_class = TurnoSerializer
+    serializer_class = TurnoSerializer1
     queryset = Turno.objects.all()
 
     def perform_create(self, serializer):
@@ -36,12 +36,6 @@ class TurnoViewSet(viewsets.ModelViewSet):
     def patch_queryset(self):
         return Turno.objects.filter(doctor_id=self.request.user.id)
 
-    # def get_permissions(self):
-    #     if self.action == "list":
-    #         self.permission_classes = [IsAuthenticated]
-    #     else:
-    #         self.permission_classes = []
-    #     return super(TurnoViewSet)
 
 
 # CreateAPIView solo crea la parte de CREATE del AMB
@@ -84,7 +78,7 @@ def editar_turno_paciente(request):
     turno_id = request.GET.get("id")
     turno = Turno.objects.filter(pk=turno_id).first()
     data = request.data
-    serializer = TurnoSerializer(turno, data, partial=True)
+    serializer = TurnoSerializer1(turno, data, partial=True)
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data, 200)
@@ -102,7 +96,7 @@ def delete_user(request):
 def turnos_disponibles(request):
     query_doctor_id = request.GET.get("doctor_id")
     turnos = Turno.objects.filter(is_taken=False, doctor_id=query_doctor_id)
-    serializer = TurnoSerializer(turnos, many=True)
+    serializer = TurnoSerializer1(turnos, many=True)
     return Response(serializer.data, 200)
 
 @api_view(["GET"])
@@ -112,17 +106,19 @@ def getturno(request):
     serializer = TurnoSerializer(turno)
     return Response(serializer.data, 200)
 
-@api_view(["GET"])
+@api_view(["PATCH"])
 def generar_preferencia(request):
     # Agrega credenciales
     sdk = mercadopago.SDK("TEST-1607425818186031-040702-f6e10bb148b0e60aea12498d3745e637-20472128")
     # Crea un ítem en la preferencia
+
+    data = request.data
     preference_data = {
         "items": [
             {
-                "title": "Mi producto",
+                "title": data["titulo"],
                 "quantity": 1,
-                "unit_price": 75.76,
+                "unit_price": int(data["precio"]),
             }
         ]
     }

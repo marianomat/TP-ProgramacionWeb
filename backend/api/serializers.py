@@ -24,6 +24,14 @@ class TurnoSerializer(serializers.ModelSerializer):
         #EL DEPTH SIRVE PARA PODER LLENAR DE DATOS LAS LLAVES FORANEAS
         depth = 1
 
+class TurnoSerializer1(serializers.ModelSerializer):
+    #Para que use el meserealizer cuando uso el depth
+
+    class Meta:
+        model = Turno
+        fields = "__all__"  # Se indican lo fields que quiero incluir en el serializer
+        #EL DEPTH SIRVE PARA PODER LLENAR DE DATOS LAS LLAVES FORANEAS
+        depth = 1
 
 class RegisterSerializer(serializers.ModelSerializer):
     # Esto hace que no se envie la password encriptada en el response body, solo lo tiene en cuenta al momento de recibir
