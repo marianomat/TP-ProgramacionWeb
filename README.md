@@ -1,4 +1,11 @@
 # TP-ProgramacionWeb v2
+
+## Cambios v2
+
+- Se implementó el sistema MercadoPago.
+- Mejora en la usabilidad para los pacientes, cuando confirma un turno lo redirige a otra pagina donde le da feedback, datos del turno y la opcion para realizar el pago.
+
+
 Trabajo Práctico de la materia Programación Web de la Tecnicatura Universitaria en Programación dictada en la Universidad Austral.
 https://getdatepicker.com/6/examples/
 
